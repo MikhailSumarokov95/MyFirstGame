@@ -8,7 +8,7 @@ public class StatusPlayer : MonoBehaviour
     [SerializeField] private GameObject _car;
     [SerializeField] private Quaternion _rotationMan = new Quaternion(73f, 0, 0, 0);
     [SerializeField] private Vector3 _positionDeltaCarAndMan = new Vector3 (0, 2f, 3f);
-    [SerializeField] public bool PlayerIsMan { get; private set; }
+    public bool PlayerIsMan { get; private set; }
 
     public void PlayerLeaveFromCar()
     {

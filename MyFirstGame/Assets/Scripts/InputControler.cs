@@ -1,18 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class InputControler : MonoBehaviour
 {
-    [SerializeField] private float _valueAcceleration = 0;
+    public float ValueAcceleration { get; private set; }
     [SerializeField] private CarControler _car;
-    [SerializeField] public bool _playerDidPush { get; private set; }
+    public bool PlayerDidPush { get; private set; }
     private bool _coroutineGetAccelerationIsStarted;
+    private Slider _slider;
 
     private void Update()
     {
 #if UNITY_EDITOR
-        if (Input.GetMouseButtonDown(0) && !_playerDidPush) GivePushPlayer();
+        if (Input.GetMouseButtonDown(0) && !PlayerDidPush) GivePushPlayer();
 #else   
         if (Input.touchCount > 0 &&
             !_playerDidPush) GivePushPlayer();
@@ -26,9 +28,10 @@ public class InputControler : MonoBehaviour
         {
             StopCoroutine("GetAcceleration");
             _coroutineGetAccelerationIsStarted = false;
-            _car.Move(_valueAcceleration);
-            _valueAcceleration = 0;
-            _playerDidPush = true;
+            _car.Move(ValueAcceleration);
+
+            ValueAcceleration = 0;
+            PlayerDidPush = true;
         }    
     }
 
@@ -37,11 +40,9 @@ public class InputControler : MonoBehaviour
         _coroutineGetAccelerationIsStarted = true;
         while (true)
         {
-            
             yield return new WaitForSeconds(0.01f);
-            if (_valueAcceleration < 100) _valueAcceleration++;
-            else _valueAcceleration = 0;
-            
+            if (ValueAcceleration < 100) ValueAcceleration++;
+            else ValueAcceleration = 0; 
         }
     }
 }
