@@ -10,6 +10,7 @@ public class UIControl : MonoBehaviour
     
     private void Update()
     {
+
         _slider.value = _inputControler.ValueAcceleration/100;
     }
 }

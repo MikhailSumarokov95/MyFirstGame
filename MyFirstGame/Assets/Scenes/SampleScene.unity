@@ -759,7 +759,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5858f69d14f70c7459ed89cfefb5519a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _man: {fileID: 1144978573833690, guid: 1e8e1924bb442334c9125455634bb567, type: 3}
   _statusPlayer: {fileID: 1169553003}
   _target: {fileID: 652107022}
   _distanceToTheCenter: 0
