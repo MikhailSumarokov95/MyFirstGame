@@ -9,7 +9,6 @@ public class InputControler : MonoBehaviour
     [SerializeField] private CarControler _car;
     public bool PlayerDidPush { get; private set; }
     private bool _coroutineGetAccelerationIsStarted;
-    private Slider _slider;
 
     private void Update()
     {

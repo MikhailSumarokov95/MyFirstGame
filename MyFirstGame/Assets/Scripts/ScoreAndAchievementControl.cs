@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -9,7 +10,9 @@ public class ScoreAndAchievementControl : MonoBehaviour
     [SerializeField] private StatusPlayer _statusPlayer;
     [SerializeField] private GameObject _target;
     [SerializeField] float _distanceToTheCenter;
+    [SerializeField] int _scoreRound;
     private bool _startedCoroutineGetTheDistanceToTheCenter;
+    [SerializeField] private UIControl _uIControl;
 
     private void Update()
     {
@@ -27,6 +30,11 @@ public class ScoreAndAchievementControl : MonoBehaviour
         {
             StartCoroutine("GetTheDistanceToTheCenter");
         }
+        if (_statusPlayer.RoundIsOver)
+        {
+            _scoreRound = (int)_distanceToTheCenter;
+            _uIControl.SetScoreText(_scoreRound);
+        }
     }
 
     IEnumerator GetTheDistanceToTheCenter()
@@ -39,6 +47,7 @@ public class ScoreAndAchievementControl : MonoBehaviour
             {
                 _distanceToTheCenter = (_man.transform.position - _target.transform.position).magnitude;
                 _startedCoroutineGetTheDistanceToTheCenter = false;
+                _statusPlayer.SetRoundIsOver();
                 StopCoroutine("GetTheDistanceToTheCenter");
             }
         }
