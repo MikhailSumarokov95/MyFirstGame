@@ -12,14 +12,14 @@ public class ScoreAndAchievementControl : MonoBehaviour
     [SerializeField] private float _distanceToTheCenter;
     [SerializeField] private int _scoreRound;
     private bool _startedCoroutineGetTheDistanceToTheCenter;
-    [SerializeField] private UIControl _uIControl;
+    [SerializeField] private GameUIControl _gameUIControl;
 
     private void Update()
     {
         if (_statusPlayer.RoundIsOver)
         { 
             GetScore();
-            _uIControl.SetScoreText(_scoreRound);
+            _gameUIControl.SetScoreText(_scoreRound);
         }
         else if (_statusPlayer.PlayerIsMan) GetHitAccuracy();
     }

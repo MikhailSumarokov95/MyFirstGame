@@ -7,7 +7,7 @@ public class StatusPlayer : MonoBehaviour
     [SerializeField] private GameObject _manPrefabs;
     private GameObject _car;
     [SerializeField] private GameObject _carPrefabs;
-    [SerializeField] private UIControl _uIControl;
+    [SerializeField] private GameUIControl _gameUIControl;
     [SerializeField] private InputControler _inputControler;
     [SerializeField] private ScoreAndAchievementControl _scoreAndAchievementControl;
 
@@ -27,6 +27,7 @@ public class StatusPlayer : MonoBehaviour
     public void SetRoundIsOver()
     {
         RoundIsOver = true;
+        _gameUIControl.RoundIsOverWindows();
     }
 
     public void Restart()
@@ -39,6 +40,6 @@ public class StatusPlayer : MonoBehaviour
         RoundIsOver = false;
         _scoreAndAchievementControl.RestartRound();
         _inputControler.RestartRound();
-        _uIControl.RestartRound();
+        _gameUIControl.RestartRound();
     }
 }

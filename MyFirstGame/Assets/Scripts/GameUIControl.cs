@@ -2,19 +2,22 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
-public class UIControl : MonoBehaviour
+public class GameUIControl : MonoBehaviour
 {
     [SerializeField] private InputControler _inputControler;
     [SerializeField] private Slider _pushForceValueSlider;
     private bool _frezeeSliderPushForceValue;
     [SerializeField] private Text _scoreText;
     [SerializeField] private GameObject _restartButton;
+    [SerializeField] private GameObject _menuButton;
     [SerializeField] private StatusPlayer _statusPlayer;
     
     private void Start()
     {
         _restartButton.GetComponent<Button>().onClick.AddListener(_statusPlayer.Restart);
+        _menuButton.GetComponent<Button>().onClick.AddListener(BackToMenu);
     }
     private void Update()
     {
@@ -37,5 +40,17 @@ public class UIControl : MonoBehaviour
         _frezeeSliderPushForceValue = false;
         SetScoreText(0);
         _pushForceValueSlider.value = 0;
+        _restartButton.SetActive(false);
+        _menuButton.SetActive(false);
+    }
+
+    public void RoundIsOverWindows()
+    {
+        _restartButton.SetActive(true);
+        _menuButton.SetActive(true);
+    }
+    private void BackToMenu()
+    {
+        SceneManager.LoadScene(0);
     }
 }
