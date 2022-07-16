@@ -6,6 +6,10 @@ TagManager:
   tags:
   - Man
   - Road
+  - Car
+  - StatusPlayer
+  - StartingPointBarrier
+  - TriggerForRegistrationSpeed
   layers:
   - Default
   - TransparentFX

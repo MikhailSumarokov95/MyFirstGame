@@ -5,13 +5,16 @@ using UnityEngine;
 public class CarControler : MonoBehaviour
 {
     private Rigidbody _carRb;
-    [SerializeField] private StatusPlayer _statusPlayerSP;
-    [SerializeField] private GameObject _startingPointBarrier;
-    [SerializeField] private GameObject _triggerForRegistrationSpeed;
+    private StatusPlayer _statusPlayerSP;
+    private GameObject _startingPointBarrier;
+    private GameObject _triggerForRegistrationSpeed;
     public float SpeedCarInMomentCrash { get; private set; }
 
-    private void Start()
+    private void Awake()
     {
+        _statusPlayerSP = GameObject.FindGameObjectWithTag("StatusPlayer").GetComponent<StatusPlayer>();
+        _startingPointBarrier = GameObject.FindGameObjectWithTag("StartingPointBarrier");
+        _triggerForRegistrationSpeed = GameObject.FindGameObjectWithTag("TriggerForRegistrationSpeed");
         _carRb = this.GetComponent<Rigidbody>();
     }
 
@@ -25,6 +28,7 @@ public class CarControler : MonoBehaviour
         if (other.gameObject.name == _triggerForRegistrationSpeed.name) 
             SpeedCarInMomentCrash = _carRb.velocity.magnitude;
     }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.gameObject.name == _startingPointBarrier.name &&

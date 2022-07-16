@@ -10,12 +10,13 @@ public class ManControler : MonoBehaviour
 
     private void Awake()
     {
+        _manRb = this.GetComponent<Rigidbody>();
+        _carControler = GameObject.FindGameObjectWithTag("Car").GetComponent<CarControler>();
         Move();
     }
+
     public void Move()
     {
-        _manRb = this.GetComponent<Rigidbody>();
-        _carControler = GameObject.Find("Car").GetComponent<CarControler>();
         _manRb.AddForce(Vector3.forward * _carControler.SpeedCarInMomentCrash * _boost, ForceMode.Impulse);
     }
 }

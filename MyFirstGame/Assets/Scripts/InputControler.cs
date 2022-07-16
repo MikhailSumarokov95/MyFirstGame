@@ -6,7 +6,6 @@ using UnityEngine.UI;
 public class InputControler : MonoBehaviour
 {
     public float ValueAcceleration { get; private set; }
-    [SerializeField] private CarControler _car;
     public bool PlayerDidPush { get; private set; }
     private bool _coroutineGetAccelerationIsStarted;
 
@@ -27,8 +26,7 @@ public class InputControler : MonoBehaviour
         {
             StopCoroutine("GetAcceleration");
             _coroutineGetAccelerationIsStarted = false;
-            _car.Move(ValueAcceleration);
-
+            GameObject.FindGameObjectWithTag("Car").GetComponent<CarControler>().Move(ValueAcceleration);
             ValueAcceleration = 0;
             PlayerDidPush = true;
         }    
@@ -43,5 +41,12 @@ public class InputControler : MonoBehaviour
             if (ValueAcceleration < 100) ValueAcceleration++;
             else ValueAcceleration = 0; 
         }
+    }
+
+    public void RestartRound()
+    {
+        PlayerDidPush = false;
+        ValueAcceleration = 0;
+        StopAllCoroutines();
     }
 }
