@@ -13,6 +13,7 @@ public class ScoreAndAchievementControl : MonoBehaviour
     [SerializeField] private int _scoreRound;
     private bool _startedCoroutineGetTheDistanceToTheCenter;
     [SerializeField] private GameUIControl _gameUIControl;
+    private StorageDataGame _storageDataGame;
 
     private void Update()
     {
@@ -20,6 +21,13 @@ public class ScoreAndAchievementControl : MonoBehaviour
         { 
             GetScore();
             _gameUIControl.SetScoreText(_scoreRound);
+            if (_storageDataGame == null)
+                _storageDataGame = GameObject.FindGameObjectWithTag("StorageDataGame").GetComponent<StorageDataGame>();
+            if (_scoreRound > _storageDataGame.GetTopScore())
+            {
+                _gameUIControl.SetTopScoreText(_scoreRound);
+                _storageDataGame.SetTopScore(_scoreRound);
+            }
         }
         else if (_statusPlayer.PlayerIsMan) GetHitAccuracy();
     }
@@ -54,10 +62,11 @@ public class ScoreAndAchievementControl : MonoBehaviour
     }
     private void GetScore()
     {
-        if (_distanceToTheCenter > _target.GetComponent<MeshFilter>().sharedMesh.bounds.size.z)
-            _scoreRound = 0;
-        else _scoreRound = (int)(_target.GetComponent<MeshFilter>().sharedMesh.bounds.size.z
-                - _distanceToTheCenter);
+        _scoreRound++;
+        //if (_distanceToTheCenter > _target.GetComponent<MeshFilter>().sharedMesh.bounds.size.z)
+        //    _scoreRound = 0;
+        //else _scoreRound = (int)(_target.GetComponent<MeshFilter>().sharedMesh.bounds.size.z
+        //        - _distanceToTheCenter);
     }
 
     public void RestartRound()

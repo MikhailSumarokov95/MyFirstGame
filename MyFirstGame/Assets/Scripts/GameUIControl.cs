@@ -10,10 +10,19 @@ public class GameUIControl : MonoBehaviour
     [SerializeField] private Slider _pushForceValueSlider;
     private bool _frezeeSliderPushForceValue;
     [SerializeField] private Text _scoreText;
+    [SerializeField] private Text _topScoreText;
     [SerializeField] private GameObject _restartButton;
     [SerializeField] private GameObject _menuButton;
     [SerializeField] private StatusPlayer _statusPlayer;
-    
+    [SerializeField] private GameObject _storageTopScore;
+    [SerializeField] private int _topScore;
+
+    private void Awake()
+    {
+        Instantiate(_storageTopScore);
+        _topScore = GameObject.FindGameObjectWithTag("StorageDataGame").GetComponent<StorageDataGame>().GetTopScore();
+        SetTopScoreText(_topScore);
+    }
     private void Start()
     {
         _restartButton.GetComponent<Button>().onClick.AddListener(_statusPlayer.Restart);
@@ -33,6 +42,12 @@ public class GameUIControl : MonoBehaviour
     public void SetScoreText (int scoreRound)
     {
         _scoreText.text = "Score: " + scoreRound;
+    }
+
+    public void SetTopScoreText(int scoreRound)
+    {
+        _topScoreText.text = "Score: " + scoreRound;
+        _topScoreText.text = "Score: " + scoreRound;
     }
 
     public void RestartRound()

@@ -10,6 +10,7 @@ TagManager:
   - StatusPlayer
   - StartingPointBarrier
   - TriggerForRegistrationSpeed
+  - StorageDataGame
   layers:
   - Default
   - TransparentFX
