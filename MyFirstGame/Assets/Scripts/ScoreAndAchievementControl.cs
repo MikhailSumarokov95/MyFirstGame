@@ -7,7 +7,7 @@ public class ScoreAndAchievementControl : MonoBehaviour
 {
     private GameObject _man;
     private Rigidbody _manRb;
-    [SerializeField] private StatusPlayer _statusPlayer;
+    [SerializeField] private GameManager _GameManager;
     [SerializeField] private GameObject _target;
     [SerializeField] private float _distanceToTheCenter;
     [SerializeField] private int _scoreRound;
@@ -18,7 +18,7 @@ public class ScoreAndAchievementControl : MonoBehaviour
 
     private void Update()
     {
-        if (_statusPlayer.RoundIsOver)
+        if (_GameManager.RoundIsOver)
         {
             GetScore();
             _gameUIControl.SetScoreText(_scoreRound);
@@ -30,9 +30,9 @@ public class ScoreAndAchievementControl : MonoBehaviour
                 _storageDataGame.SetTopScore(_scoreRound);
             }
         }
-        else if (_statusPlayer.PlayerIsMan) GetHitAccuracy();
-        else if (!_statusPlayer.PlayerIsMan && _carControler.SpeedCar == 0)
-            _statusPlayer.SetRoundIsOver();
+        else if (_GameManager.PlayerIsMan) GetHitAccuracy();
+        //else if (!_GameManager.PlayerIsMan && _carControler.SpeedCar == 0)
+            //_GameManager.SetRoundIsOver();
     }
 
     private void GetHitAccuracy()
@@ -58,7 +58,7 @@ public class ScoreAndAchievementControl : MonoBehaviour
             {
                 _distanceToTheCenter = Vector3.Distance(_target.transform.position, _man.transform.position);
                 _startedCoroutineGetTheDistanceToTheCenter = false;
-                _statusPlayer.SetRoundIsOver();
+                _GameManager.SetRoundIsOver();
                 StopCoroutine("GetTheDistanceToTheCenter");
             }
         }

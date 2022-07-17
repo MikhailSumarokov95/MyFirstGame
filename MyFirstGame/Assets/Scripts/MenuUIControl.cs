@@ -29,6 +29,6 @@ public class MenuUIControl : MonoBehaviour
 
     private void SetTopScoreText(int topScore)
     {
-        _topScoreText.text = "Top Score" + topScore;
+        _topScoreText.text = "Top Score: " + topScore;
     }
 }

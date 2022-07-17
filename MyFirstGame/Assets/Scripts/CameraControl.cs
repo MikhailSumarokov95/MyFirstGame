@@ -6,7 +6,7 @@ public class CameraControl : MonoBehaviour
 {
     private Vector3 _distanceOffset = new Vector3(0, 7.5f, -6.7f);
     private GameObject _car;
-    [SerializeField] private StatusPlayer _statusPlayer;
+    [SerializeField] private GameManager _statusPlayer;
     private GameObject _man;
 
     private void LateUpdate()

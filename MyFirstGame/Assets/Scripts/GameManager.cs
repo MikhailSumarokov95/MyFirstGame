@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class StatusPlayer : MonoBehaviour
+public class GameManager : MonoBehaviour
 {
     [SerializeField] private GameObject _manPrefabs;
     private GameObject _car;
@@ -17,6 +17,10 @@ public class StatusPlayer : MonoBehaviour
     public bool PlayerIsMan { get; private set; }
     public bool RoundIsOver { get; private set; }
 
+    private void Awake()
+    {
+        StartRound();
+    }
     public void PlayerLeaveFromCar()
     {
         _car = GameObject.FindGameObjectWithTag("Car");

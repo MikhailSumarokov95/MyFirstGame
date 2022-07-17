@@ -13,14 +13,14 @@ public class GameUIControl : MonoBehaviour
     [SerializeField] private Text _topScoreText;
     [SerializeField] private GameObject _restartButton;
     [SerializeField] private GameObject _menuButton;
-    [SerializeField] private StatusPlayer _statusPlayer;
+    [SerializeField] private GameManager _statusPlayer;
     [SerializeField] private GameObject _storageTopScore;
     [SerializeField] private int _topScore;
 
     private void Awake()
     {
         Instantiate(_storageTopScore);
-        _topScore = _storageTopScore.GetComponent<StorageDataGame>().GetTopScore();
+        _topScore = GameObject.FindGameObjectWithTag("StorageDataGame").GetComponent<StorageDataGame>().GetTopScore();
         SetTopScoreText(_topScore);
     }
     private void Start()
@@ -44,9 +44,9 @@ public class GameUIControl : MonoBehaviour
         _scoreText.text = "Score: " + scoreRound;
     }
 
-    public void SetTopScoreText(int scoreRound)
+    public void SetTopScoreText(int topScore)
     {
-        _topScoreText.text = "Score: " + scoreRound;
+        _topScoreText.text = "Top Score: " + topScore;
     }
 
     public void StartRound()
@@ -56,6 +56,7 @@ public class GameUIControl : MonoBehaviour
         _pushForceValueSlider.value = 0;
         _restartButton.SetActive(false);
         _menuButton.SetActive(false);
+        
     }
 
     public void RoundIsOverWindows()

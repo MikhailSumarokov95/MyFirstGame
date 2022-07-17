@@ -5,7 +5,7 @@ using UnityEngine;
 public class CarControler : MonoBehaviour
 {
     private Rigidbody _carRb;
-    private StatusPlayer _statusPlayerSP;
+    private GameManager _statusPlayerSP;
     private GameObject _startingPointBarrier;
     private GameObject _triggerForRegistrationSpeed;
     public float SpeedCarInMomentCrash { get; private set; }
@@ -13,7 +13,7 @@ public class CarControler : MonoBehaviour
 
     private void Awake()
     {
-        _statusPlayerSP = GameObject.FindGameObjectWithTag("StatusPlayer").GetComponent<StatusPlayer>();
+        _statusPlayerSP = GameObject.FindGameObjectWithTag("StatusPlayer").GetComponent<GameManager>();
         _startingPointBarrier = GameObject.FindGameObjectWithTag("StartingPointBarrier");
         _triggerForRegistrationSpeed = GameObject.FindGameObjectWithTag("TriggerForRegistrationSpeed");
         _carRb = this.GetComponent<Rigidbody>();

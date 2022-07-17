@@ -436,8 +436,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
-  m_AnchoredPosition: {x: 129, y: -37}
-  m_SizeDelta: {x: 215.4736, y: 49.1288}
+  m_AnchoredPosition: {x: 204.15314, y: -37}
+  m_SizeDelta: {x: 365.7798, y: 49.1288}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &532543111
 MonoBehaviour:
@@ -472,7 +472,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 'TopScore: 0'
+  m_Text: 'Top Score: 0'
 --- !u!222 &532543112
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1286,7 +1286,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5858f69d14f70c7459ed89cfefb5519a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _statusPlayer: {fileID: 1169553003}
+  _GameManager: {fileID: 1169553003}
   _target: {fileID: 652107022}
   _distanceToTheCenter: 0
   _scoreRound: 0
@@ -1454,7 +1454,7 @@ GameObject:
   - component: {fileID: 1169553004}
   - component: {fileID: 1169553003}
   m_Layer: 0
-  m_Name: StatusPlayer
+  m_Name: GameManager
   m_TagString: StatusPlayer
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1760,11 +1760,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5494360683534356393, guid: c2bba1f796e6e1349a226f6dc300459b, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -39
+      value: -34
       objectReference: {fileID: 0}
     - target: {fileID: 5494360683534356393, guid: c2bba1f796e6e1349a226f6dc300459b, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 90
+      value: 100
       objectReference: {fileID: 0}
     - target: {fileID: 5494360683534356393, guid: c2bba1f796e6e1349a226f6dc300459b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
