@@ -14,11 +14,12 @@ public class ScoreAndAchievementControl : MonoBehaviour
     private bool _startedCoroutineGetTheDistanceToTheCenter;
     [SerializeField] private GameUIControl _gameUIControl;
     private StorageDataGame _storageDataGame;
+    private CarControler _carControler;
 
     private void Update()
     {
         if (_statusPlayer.RoundIsOver)
-        { 
+        {
             GetScore();
             _gameUIControl.SetScoreText(_scoreRound);
             if (_storageDataGame == null)
@@ -30,6 +31,8 @@ public class ScoreAndAchievementControl : MonoBehaviour
             }
         }
         else if (_statusPlayer.PlayerIsMan) GetHitAccuracy();
+        else if (!_statusPlayer.PlayerIsMan && _carControler.SpeedCar == 0)
+            _statusPlayer.SetRoundIsOver();
     }
 
     private void GetHitAccuracy()
@@ -69,9 +72,10 @@ public class ScoreAndAchievementControl : MonoBehaviour
         //        - _distanceToTheCenter);
     }
 
-    public void RestartRound()
+    public void StartRound()
     {
         _scoreRound = 0;
         StopAllCoroutines();
+        _carControler = GameObject.FindGameObjectWithTag("Car").GetComponent<CarControler>();
     }
 }

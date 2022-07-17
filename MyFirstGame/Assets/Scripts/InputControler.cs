@@ -43,7 +43,7 @@ public class InputControler : MonoBehaviour
         }
     }
 
-    public void RestartRound()
+    public void StartRound()
     {
         PlayerDidPush = false;
         ValueAcceleration = 0;

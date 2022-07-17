@@ -20,12 +20,12 @@ public class GameUIControl : MonoBehaviour
     private void Awake()
     {
         Instantiate(_storageTopScore);
-        _topScore = GameObject.FindGameObjectWithTag("StorageDataGame").GetComponent<StorageDataGame>().GetTopScore();
+        _topScore = _storageTopScore.GetComponent<StorageDataGame>().GetTopScore();
         SetTopScoreText(_topScore);
     }
     private void Start()
     {
-        _restartButton.GetComponent<Button>().onClick.AddListener(_statusPlayer.Restart);
+        _restartButton.GetComponent<Button>().onClick.AddListener(_statusPlayer.StartRound);
         _menuButton.GetComponent<Button>().onClick.AddListener(BackToMenu);
     }
     private void Update()
@@ -47,10 +47,9 @@ public class GameUIControl : MonoBehaviour
     public void SetTopScoreText(int scoreRound)
     {
         _topScoreText.text = "Score: " + scoreRound;
-        _topScoreText.text = "Score: " + scoreRound;
     }
 
-    public void RestartRound()
+    public void StartRound()
     {
         _frezeeSliderPushForceValue = false;
         SetScoreText(0);

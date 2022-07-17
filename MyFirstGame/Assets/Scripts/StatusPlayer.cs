@@ -30,16 +30,15 @@ public class StatusPlayer : MonoBehaviour
         _gameUIControl.RoundIsOverWindows();
     }
 
-    public void Restart()
+    public void StartRound()
     {
-        _car = GameObject.FindGameObjectWithTag("Car");
-        Destroy(_car);
+        Destroy(GameObject.FindGameObjectWithTag("Car"));
         Instantiate(_carPrefabs, _startsCarPosition, _carPrefabs.transform.rotation);
         Destroy(GameObject.FindGameObjectWithTag("Man"));
         PlayerIsMan = false;
         RoundIsOver = false;
-        _scoreAndAchievementControl.RestartRound();
-        _inputControler.RestartRound();
-        _gameUIControl.RestartRound();
+        _scoreAndAchievementControl.StartRound();
+        _inputControler.StartRound();
+        _gameUIControl.StartRound();
     }
 }

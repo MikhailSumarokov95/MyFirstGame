@@ -9,6 +9,7 @@ public class CarControler : MonoBehaviour
     private GameObject _startingPointBarrier;
     private GameObject _triggerForRegistrationSpeed;
     public float SpeedCarInMomentCrash { get; private set; }
+    public float SpeedCar { get; private set; }
 
     private void Awake()
     {
@@ -16,6 +17,11 @@ public class CarControler : MonoBehaviour
         _startingPointBarrier = GameObject.FindGameObjectWithTag("StartingPointBarrier");
         _triggerForRegistrationSpeed = GameObject.FindGameObjectWithTag("TriggerForRegistrationSpeed");
         _carRb = this.GetComponent<Rigidbody>();
+    }
+
+    private void Update()
+    {
+        SpeedCar = _carRb.velocity.magnitude;
     }
 
     public void Move(float valueAcceleration)
