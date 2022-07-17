@@ -22,6 +22,7 @@ public class CarControler : MonoBehaviour
     private void Update()
     {
         SpeedCar = _carRb.velocity.magnitude;
+        Debug.Log(SpeedCar);
     }
 
     public void Move(float valueAcceleration)

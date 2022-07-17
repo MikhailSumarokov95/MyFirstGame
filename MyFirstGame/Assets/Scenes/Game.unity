@@ -1286,11 +1286,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5858f69d14f70c7459ed89cfefb5519a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _GameManager: {fileID: 1169553003}
+  _gameManager: {fileID: 1169553003}
   _target: {fileID: 652107022}
   _distanceToTheCenter: 0
   _scoreRound: 0
   _gameUIControl: {fileID: 2033899471}
+  _inputControler: {fileID: 581782069}
 --- !u!4 &992593488
 Transform:
   m_ObjectHideFlags: 0

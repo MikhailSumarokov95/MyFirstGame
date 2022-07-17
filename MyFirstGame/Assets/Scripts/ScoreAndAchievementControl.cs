@@ -7,7 +7,7 @@ public class ScoreAndAchievementControl : MonoBehaviour
 {
     private GameObject _man;
     private Rigidbody _manRb;
-    [SerializeField] private GameManager _GameManager;
+    [SerializeField] private GameManager _gameManager;
     [SerializeField] private GameObject _target;
     [SerializeField] private float _distanceToTheCenter;
     [SerializeField] private int _scoreRound;
@@ -15,24 +15,33 @@ public class ScoreAndAchievementControl : MonoBehaviour
     [SerializeField] private GameUIControl _gameUIControl;
     private StorageDataGame _storageDataGame;
     private CarControler _carControler;
+    [SerializeField] private InputControler _inputControler;
+
 
     private void Update()
     {
-        if (_GameManager.RoundIsOver)
+        Debug.Log("PlayerIsMan " + _gameManager.PlayerIsMan);
+        Debug.Log("PlayerDidPush " + _inputControler.PlayerDidPush);
+        Debug.Log("RoundIsOver " + _gameManager.RoundIsOver);
+        Debug.Log("SpeedCar " + _carControler.SpeedCar);
+        if (_gameManager.RoundIsOver && _gameManager.PlayerIsMan)
         {
+            Debug.Log("GetSCore");
             GetScore();
             _gameUIControl.SetScoreText(_scoreRound);
-            if (_storageDataGame == null)
-                _storageDataGame = GameObject.FindGameObjectWithTag("StorageDataGame").GetComponent<StorageDataGame>();
-            if (_scoreRound > _storageDataGame.GetTopScore())
-            {
-                _gameUIControl.SetTopScoreText(_scoreRound);
-                _storageDataGame.SetTopScore(_scoreRound);
-            }
+            SetTopScore();
         }
-        else if (_GameManager.PlayerIsMan) GetHitAccuracy();
-        //else if (!_GameManager.PlayerIsMan && _carControler.SpeedCar == 0)
-            //_GameManager.SetRoundIsOver();
+        else if (_gameManager.PlayerIsMan)
+        {
+            GetHitAccuracy();
+            Debug.Log("GetHitAccuracy");
+        }
+        else if (!_gameManager.PlayerIsMan && _inputControler.PlayerDidPush
+            && _carControler.SpeedCar > 0.01 && _carControler.SpeedCar < 2)
+        {
+            _gameManager.SetRoundIsOver();
+            Debug.Log("RoundIsOver");
+        }
     }
 
     private void GetHitAccuracy()
@@ -58,7 +67,7 @@ public class ScoreAndAchievementControl : MonoBehaviour
             {
                 _distanceToTheCenter = Vector3.Distance(_target.transform.position, _man.transform.position);
                 _startedCoroutineGetTheDistanceToTheCenter = false;
-                _GameManager.SetRoundIsOver();
+                _gameManager.SetRoundIsOver();
                 StopCoroutine("GetTheDistanceToTheCenter");
             }
         }
@@ -70,6 +79,17 @@ public class ScoreAndAchievementControl : MonoBehaviour
         //    _scoreRound = 0;
         //else _scoreRound = (int)(_target.GetComponent<MeshFilter>().sharedMesh.bounds.size.z
         //        - _distanceToTheCenter);
+    }
+
+    private void SetTopScore()
+    {
+        if (_storageDataGame == null)
+            _storageDataGame = GameObject.FindGameObjectWithTag("StorageDataGame").GetComponent<StorageDataGame>();
+        if (_scoreRound > _storageDataGame.GetTopScore())
+        {
+            _gameUIControl.SetTopScoreText(_scoreRound);
+            _storageDataGame.SetTopScore(_scoreRound);
+        }
     }
 
     public void StartRound()

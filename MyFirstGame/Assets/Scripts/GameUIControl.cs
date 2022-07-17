@@ -13,7 +13,7 @@ public class GameUIControl : MonoBehaviour
     [SerializeField] private Text _topScoreText;
     [SerializeField] private GameObject _restartButton;
     [SerializeField] private GameObject _menuButton;
-    [SerializeField] private GameManager _statusPlayer;
+    [SerializeField] private GameManager _gameManager;
     [SerializeField] private GameObject _storageTopScore;
     [SerializeField] private int _topScore;
 
@@ -25,7 +25,7 @@ public class GameUIControl : MonoBehaviour
     }
     private void Start()
     {
-        _restartButton.GetComponent<Button>().onClick.AddListener(_statusPlayer.StartRound);
+        _restartButton.GetComponent<Button>().onClick.AddListener(_gameManager.StartRound);
         _menuButton.GetComponent<Button>().onClick.AddListener(BackToMenu);
     }
     private void Update()
