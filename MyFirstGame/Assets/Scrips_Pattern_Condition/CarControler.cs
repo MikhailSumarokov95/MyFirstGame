@@ -4,12 +4,18 @@ using UnityEngine;
 
 public class CarControler : MonoBehaviour
 {
+    public float SpeedCarInMomentCrash { get; private set; }
+    public bool CarCrashedIntoBarrier { get; private set; }
+    public Vector3 PositionCarInMomentCrash { get; private set; }
     private Rigidbody _carRb;
     //private GameManager _statusPlayerSP;
     private GameObject _startingPointBarrier;
     private GameObject _triggerForRegistrationSpeed;
-    public float SpeedCarInMomentCrash { get; private set; }
+    
+
+
     //public float SpeedCar { get; private set; }
+
 
     private void Awake()
     {
@@ -24,6 +30,12 @@ public class CarControler : MonoBehaviour
     //    SpeedCar = _carRb.velocity.magnitude;
     //    Debug.Log(SpeedCar);
     //}
+    public void ResetCrashedValue()
+    {
+        SpeedCarInMomentCrash = 0;
+        CarCrashedIntoBarrier = false;
+        PositionCarInMomentCrash = Vector3.zero;
+    }
 
     public void Move(float valuePush)
     {
@@ -38,7 +50,10 @@ public class CarControler : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.name == _startingPointBarrier.name &&
-            GameObject.FindGameObjectsWithTag("Man").Length < 1) ;
+        if (collision.gameObject.name == _startingPointBarrier.name)
+        {
+            PositionCarInMomentCrash = this.transform.position;
+            CarCrashedIntoBarrier = true;
+        }
     }
 }

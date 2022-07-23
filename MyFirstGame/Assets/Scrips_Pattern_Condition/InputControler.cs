@@ -12,12 +12,9 @@ namespace FlyMan.Game
 
         public bool FollowTheTouchOnTheScreen()
         {
-            Debug.Log("InputFollow");
 #if UNITY_EDITOR
-            Debug.Log("UNITY_EDITOR");
             if (Input.GetMouseButtonDown(0))
             {
-                Debug.Log("MouseDown");
                 return true;
             }
 #else
