@@ -2,12 +2,12 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using FlyMan;
+using FlyMan.Behavior;
 
 public class Player : MonoBehaviour
 {
-    private Dictionary<Type, IPlayerBehavior> behaviorsMap;
-    private IPlayerBehavior behaviorCurrent;
+    private Dictionary<Type, IPlayerBehavior> _behaviorsMap;
+    private IPlayerBehavior _behaviorCurrent;
 
     private void Start()
     {
@@ -17,21 +17,21 @@ public class Player : MonoBehaviour
 
     private void InitBehavior()
     {
-        this.behaviorsMap = new Dictionary<Type, IPlayerBehavior>();
+        this._behaviorsMap = new Dictionary<Type, IPlayerBehavior>();
 
-        this.behaviorsMap[typeof(IPlayerBehaviorCarStanding)] = new IPlayerBehaviorCarStanding();
-        this.behaviorsMap[typeof(IPlayerBehaviorCarRides)] = new IPlayerBehaviorCarRides();
-        this.behaviorsMap[typeof(IPlayerBehaviorManFlies)] = new IPlayerBehaviorManFlies();
-        this.behaviorsMap[typeof(IPlayerBehaviorManHasStopped)] = new IPlayerBehaviorManHasStopped();
+        this._behaviorsMap[typeof(IPlayerBehaviorCarStanding)] = new IPlayerBehaviorCarStanding();
+        this._behaviorsMap[typeof(IPlayerBehaviorCarRides)] = new IPlayerBehaviorCarRides();
+        this._behaviorsMap[typeof(IPlayerBehaviorManFlies)] = new IPlayerBehaviorManFlies();
+        this._behaviorsMap[typeof(IPlayerBehaviorManHasStopped)] = new IPlayerBehaviorManHasStopped();
     }
 
     private void SetBehavior(IPlayerBehavior newBehavior)
     {
-        if (this.behaviorCurrent != null)
-            this.behaviorCurrent.Exit();
+        if (this._behaviorCurrent != null)
+            this._behaviorCurrent.Exit();
 
-        this.behaviorCurrent = newBehavior;
-        this.behaviorCurrent.Enter();
+        this._behaviorCurrent = newBehavior;
+        this._behaviorCurrent.Enter();
     }
 
     private void SetBehaviorByDefaulte()
@@ -42,53 +42,53 @@ public class Player : MonoBehaviour
     private IPlayerBehavior GetBehavior<T>() where T : IPlayerBehavior
     {
         var type = typeof(T);
-        return this.behaviorsMap[type];
+        return this._behaviorsMap[type];
     }
 
     private void Update()
     {
-        if (this.behaviorCurrent != null)
-            this.behaviorCurrent.Update();
+        if (this._behaviorCurrent != null)
+            this._behaviorCurrent.Update();
     }
 
     public void SetBehaviorCarStanding()
     {
-        if (behaviorCurrent == null! ||
-            behaviorCurrent == behaviorsMap[typeof(IPlayerBehaviorManHasStopped)])
+        if (_behaviorCurrent == null ||
+            _behaviorCurrent == _behaviorsMap[typeof(IPlayerBehaviorManHasStopped)])
         {
             var behavior = this.GetBehavior<IPlayerBehaviorCarStanding>();
             this.SetBehavior(behavior);
         }
-        else Debug.Log($"Error! Transition from {behaviorCurrent} to BehaviorCarStanding");
+        else Debug.Log($"Error! Transition from {_behaviorCurrent} to BehaviorCarStanding");
     }
 
     public void SetBehaviorCarRides()
     {
-        if (behaviorCurrent == behaviorsMap[typeof(IPlayerBehaviorCarStanding)])
+        if (_behaviorCurrent == _behaviorsMap[typeof(IPlayerBehaviorCarStanding)])
         {
             var behavior = this.GetBehavior<IPlayerBehaviorCarRides>();
-        this.SetBehavior(behavior);
+            this.SetBehavior(behavior);
         }
-        else Debug.Log($"Error! Transition from {behaviorCurrent} to BehaviorManHasStopped");
+        else Debug.Log($"Error! Transition from {_behaviorCurrent} to BehaviorManHasStopped");
     }
 
     public void SetBehaviorManFlies()
     {
-        if (behaviorCurrent == behaviorsMap[typeof(IPlayerBehaviorCarRides)])
+        if (_behaviorCurrent == _behaviorsMap[typeof(IPlayerBehaviorCarRides)])
         {
             var behavior = this.GetBehavior<IPlayerBehaviorManFlies>();
-        this.SetBehavior(behavior);
+            this.SetBehavior(behavior);
         }
-        else Debug.Log($"Error! Transition from {behaviorCurrent} to BehaviorManFlies");
+        else Debug.Log($"Error! Transition from {_behaviorCurrent} to BehaviorManFlies");
     }
 
     public void SetBehaviorManStopped()
     {
-        if (behaviorCurrent == behaviorsMap[typeof(IPlayerBehaviorManFlies)])
+        if (_behaviorCurrent == _behaviorsMap[typeof(IPlayerBehaviorManFlies)])
         {
             var behavior = this.GetBehavior<IPlayerBehaviorManHasStopped>();
             this.SetBehavior(behavior);
         }
-        else Debug.Log($"Error! Transition from {behaviorCurrent} to BehaviorCarStanding");
+        else Debug.Log($"Error! Transition from {_behaviorCurrent} to BehaviorCarStanding");
     }
 }

@@ -1,4 +1,4 @@
-﻿namespace FlyMan
+﻿namespace FlyMan.Behavior
 {
     public interface IPlayerBehavior
     {

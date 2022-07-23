@@ -1,10 +1,10 @@
-﻿namespace FlyMan
+﻿namespace FlyMan.Behavior
 {
     public class IPlayerBehaviorManHasStopped : IPlayerBehavior
     {
         public void Enter()
         {
-
+            
         }
 
         public void Exit()

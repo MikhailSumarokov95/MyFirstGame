@@ -2,44 +2,47 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CarControler : MonoBehaviour
+namespace FlyMan.Old
 {
-    private Rigidbody _carRb;
-    private GameManager _statusPlayerSP;
-    private GameObject _startingPointBarrier;
-    private GameObject _triggerForRegistrationSpeed;
-    public float SpeedCarInMomentCrash { get; private set; }
-    public float SpeedCar { get; private set; }
-
-    private void Awake()
+    public class CarControler : MonoBehaviour
     {
-        _statusPlayerSP = GameObject.FindGameObjectWithTag("StatusPlayer").GetComponent<GameManager>();
-        _startingPointBarrier = GameObject.FindGameObjectWithTag("StartingPointBarrier");
-        _triggerForRegistrationSpeed = GameObject.FindGameObjectWithTag("TriggerForRegistrationSpeed");
-        _carRb = this.GetComponent<Rigidbody>();
-    }
+        private Rigidbody _carRb;
+        private GameManager _statusPlayerSP;
+        private GameObject _startingPointBarrier;
+        private GameObject _triggerForRegistrationSpeed;
+        public float SpeedCarInMomentCrash { get; private set; }
+        public float SpeedCar { get; private set; }
 
-    private void Update()
-    {
-        SpeedCar = _carRb.velocity.magnitude;
-        Debug.Log(SpeedCar);
-    }
+        private void Awake()
+        {
+            _statusPlayerSP = GameObject.FindGameObjectWithTag("StatusPlayer").GetComponent<GameManager>();
+            _startingPointBarrier = GameObject.FindGameObjectWithTag("StartingPointBarrier");
+            _triggerForRegistrationSpeed = GameObject.FindGameObjectWithTag("TriggerForRegistrationSpeed");
+            _carRb = this.GetComponent<Rigidbody>();
+        }
 
-    public void Move(float valueAcceleration)
-    {
-        _carRb.AddForce(Vector3.forward * valueAcceleration, ForceMode.Impulse);
-    }
+        private void Update()
+        {
+            SpeedCar = _carRb.velocity.magnitude;
+            Debug.Log(SpeedCar);
+        }
 
-    private void OnTriggerEnter(Collider other)
-    {
-        if (other.gameObject.name == _triggerForRegistrationSpeed.name) 
-            SpeedCarInMomentCrash = _carRb.velocity.magnitude;
-    }
+        public void Move(float valueAcceleration)
+        {
+            _carRb.AddForce(Vector3.forward * valueAcceleration, ForceMode.Impulse);
+        }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.name == _startingPointBarrier.name &&
-            GameObject.FindGameObjectsWithTag("Man").Length < 1)
-            _statusPlayerSP.PlayerLeaveFromCar();
+        private void OnTriggerEnter(Collider other)
+        {
+            if (other.gameObject.name == _triggerForRegistrationSpeed.name)
+                SpeedCarInMomentCrash = _carRb.velocity.magnitude;
+        }
+
+        private void OnCollisionEnter(Collision collision)
+        {
+            if (collision.gameObject.name == _startingPointBarrier.name &&
+                GameObject.FindGameObjectsWithTag("Man").Length < 1)
+                _statusPlayerSP.PlayerLeaveFromCar();
+        }
     }
 }
