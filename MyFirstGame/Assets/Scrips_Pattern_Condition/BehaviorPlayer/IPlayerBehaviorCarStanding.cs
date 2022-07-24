@@ -13,8 +13,10 @@ namespace FlyMan.Behavior
         private int _numberOfTapsOnTheScreen;
         private Vector3 _carStartPosition;
         private CameraControl _cameraControl;
+
         public void Enter()
         {
+            
             _creator = GameObject.FindGameObjectWithTag("Creator").GetComponent<Creator>();
             _creator.CreateCar(_carStartPosition);
             _inputControler = GameObject.FindGameObjectWithTag("InputControler").GetComponent<InputControler>();
@@ -22,7 +24,7 @@ namespace FlyMan.Behavior
             _carControler = GameObject.FindGameObjectWithTag("Car").GetComponent<CarControler>();
             _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
             _cameraControl = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraControl>();
-            _cameraControl.ManIsCreated = false;
+            _cameraControl.FollowCar();
         }
 
         public void Exit()

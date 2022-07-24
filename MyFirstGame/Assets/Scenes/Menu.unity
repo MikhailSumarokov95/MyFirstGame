@@ -677,7 +677,6 @@ GameObject:
   - component: {fileID: 1078869402}
   - component: {fileID: 1078869401}
   - component: {fileID: 1078869400}
-  - component: {fileID: 1078869404}
   m_Layer: 5
   m_Name: Canvas
   m_TagString: Untagged
@@ -769,21 +768,6 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
---- !u!114 &1078869404
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1078869399}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 82e5bd9177294a4458bbfdc4740fdd89, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  _start: {fileID: 2095405620}
-  _topScoreText: {fileID: 320595332}
-  _storageTopScore: {fileID: 5769164267590111405, guid: ddc37141c863aaf49a21860b49406a91, type: 3}
 --- !u!1001 &1229986306
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -855,6 +839,7 @@ PrefabInstance:
     - {fileID: 7605477803342017756, guid: 09082afec7b5e824ca611a0cc3264bcd, type: 3}
     - {fileID: 7096739879515136923, guid: 09082afec7b5e824ca611a0cc3264bcd, type: 3}
     - {fileID: 7937596396223858774, guid: 09082afec7b5e824ca611a0cc3264bcd, type: 3}
+    - {fileID: 7813037407995137957, guid: 09082afec7b5e824ca611a0cc3264bcd, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 09082afec7b5e824ca611a0cc3264bcd, type: 3}
 --- !u!1 &1374200178
 GameObject:

@@ -5,30 +5,46 @@ using UnityEngine;
 namespace FlyMan.Game {
     public class CameraControl : MonoBehaviour
     {
-        public bool ManIsCreated;
-        public Vector3 _positionGamers;
+        private bool ManIsTarget;
         private Vector3 _distanceOffset = new Vector3(0, 7.5f, -6.7f);
         private GameObject _car;
         private GameObject _man;
-
+        private bool _stopFollow;
 
         private void LateUpdate()
         {
-            Move();
+            if (!_stopFollow) Move();
+        }
+
+        public void FollowMan()
+        {
+            _man = GameObject.FindGameObjectWithTag("Man");
+            ManIsTarget = true;
+            _stopFollow = false;
+        }
+
+        public void FollowCar()
+        {
+            _car = GameObject.FindGameObjectWithTag("Car");
+            ManIsTarget = false;
+            _stopFollow = false;
+        }
+
+        public void StopFollow()
+        {
+            _stopFollow = true;
         }
 
         private void Move()
         {
-            if (!ManIsCreated)
+            if (ManIsTarget)
             {
-                _car = GameObject.FindGameObjectWithTag("Car");
-                this.transform.position = _car.transform.position + _distanceOffset;
+                this.transform.position = _man.transform.position + _distanceOffset;
             }
             else
             {
-                _man = GameObject.FindGameObjectWithTag("Man");
-                this.transform.position = _man.transform.position + _distanceOffset;
+                this.transform.position = _car.transform.position + _distanceOffset;
             }
-        }
+        }  
     }
 }

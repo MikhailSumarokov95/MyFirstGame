@@ -9,6 +9,7 @@ namespace FlyMan.Game
         [SerializeField] private GameObject[] _carPrefabs;
         [SerializeField] private GameObject _manPrefabs;
 
+
         public void CreateCar(Vector3 startPosition)
         {
             Instantiate(_carPrefabs[0], startPosition, _carPrefabs[0].transform.rotation);

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace FlyMan.Game
@@ -12,8 +13,10 @@ namespace FlyMan.Game
         //private bool _frezeeSliderPushForceValue;
         //[SerializeField] private Text _scoreText;
         //[SerializeField] private Text _topScoreText;
-        //[SerializeField] private GameObject _restartButton;
-        //[SerializeField] private GameObject _menuButton;
+        [SerializeField] private GameObject _restartButton;
+        [SerializeField] private GameObject _menuButton;
+        public bool RestartButtonOnClick { get; private set; }
+        public bool MenuButtonOnClick { get; private set; }
         //[SerializeField] private GameManager _gameManager;
         //[SerializeField] private GameObject _storageTopScore;
         //[SerializeField] private int _topScore;
@@ -24,11 +27,10 @@ namespace FlyMan.Game
         //    _topScore = GameObject.FindGameObjectWithTag("StorageDataGame").GetComponent<StorageDataGame>().GetTopScore();
         //    SetTopScoreText(_topScore);
         //}
-        //private void Start()
-        //{
-        //    _restartButton.GetComponent<Button>().onClick.AddListener(_gameManager.StartRound);
-        //    _menuButton.GetComponent<Button>().onClick.AddListener(BackToMenu);
-        //}
+        private void Start()
+        {
+            
+        }
 
         public void GetValueSliderPushForce(float value)
         {
@@ -55,14 +57,21 @@ namespace FlyMan.Game
 
         //}
 
-        //public void RoundIsOverWindows()
-        //{
-        //    _restartButton.SetActive(true);
-        //    _menuButton.SetActive(true);
-        //}
-        //private void BackToMenu()
-        //{
-        //    SceneManager.LoadScene(0);
-        //}
+        public void ActivateRoundIsOverWindows()
+        {
+            _restartButton.SetActive(true);
+            _menuButton.SetActive(true);
+            _restartButton.GetComponent<Button>().onClick.AddListener(SetRestartButtonOnClick);
+            _menuButton.GetComponent<Button>().onClick.AddListener(SetMenuButtonOnClick);
+        }
+
+        private void SetRestartButtonOnClick()
+        {
+            RestartButtonOnClick = true;
+        }
+        private void SetMenuButtonOnClick()
+        {
+            MenuButtonOnClick = true;
+        }
     }
 }

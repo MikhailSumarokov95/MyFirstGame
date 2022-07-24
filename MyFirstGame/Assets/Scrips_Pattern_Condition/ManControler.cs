@@ -14,4 +14,9 @@ public class ManControler : MonoBehaviour
     {
         _manRb.AddForce(directionPush * forsePush, ForceMode.Impulse);
     }
+
+    public bool CheckAMansStop()
+    {
+        return _manRb.velocity.magnitude < 0.1;
+    }
 }

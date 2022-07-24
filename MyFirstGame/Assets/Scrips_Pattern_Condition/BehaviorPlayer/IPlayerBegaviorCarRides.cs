@@ -14,6 +14,7 @@ namespace FlyMan.Behavior
         private int _boostSpeedMoveMan = 100;
         private Vector3 _manStartPosition;
         private Vector3 _indetManPosition = new Vector3(0, 1.7f, 1.5f);
+
         public void Enter()
         {
             _carControler = GameObject.FindGameObjectWithTag("Car").GetComponent<CarControler>();
