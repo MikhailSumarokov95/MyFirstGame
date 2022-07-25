@@ -47,22 +47,20 @@ namespace FlyMan.Game
         //    _topScoreText.text = "Top Score: " + topScore;
         //}
 
-        //public void StartRound()
-        //{
-        //    _frezeeSliderPushForceValue = false;
-        //    SetScoreText(0);
-        //    _sliderPushForceValue.value = 0;
-        //    _restartButton.SetActive(false);
-        //    _menuButton.SetActive(false);
-
-        //}
-
         public void ActivateRoundIsOverWindows()
         {
             _restartButton.SetActive(true);
             _menuButton.SetActive(true);
             _restartButton.GetComponent<Button>().onClick.AddListener(SetRestartButtonOnClick);
             _menuButton.GetComponent<Button>().onClick.AddListener(SetMenuButtonOnClick);
+        }
+
+        public void DisableRoundIsOverWindows()
+        {
+            RestartButtonOnClick = false;
+            MenuButtonOnClick = false;
+            _restartButton.SetActive(false);
+            _menuButton.SetActive(false);
         }
 
         private void SetRestartButtonOnClick()

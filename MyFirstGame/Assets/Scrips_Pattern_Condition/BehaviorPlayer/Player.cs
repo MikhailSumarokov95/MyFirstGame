@@ -84,11 +84,7 @@ public class Player : MonoBehaviour
 
     public void SetBehaviorManStopped()
     {
-        if (_behaviorCurrent == _behaviorsMap[typeof(IPlayerBehaviorManFlies)])
-        {
             var behavior = this.GetBehavior<IPlayerBehaviorManHasStopped>();
             this.SetBehavior(behavior);
-        }
-        else Debug.Log($"Error! Transition from {_behaviorCurrent} to BehaviorCarStanding");
     }
 }

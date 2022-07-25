@@ -8,28 +8,16 @@ public class CarControler : MonoBehaviour
     public bool CarCrashedIntoBarrier { get; private set; }
     public Vector3 PositionCarInMomentCrash { get; private set; }
     private Rigidbody _carRb;
-    //private GameManager _statusPlayerSP;
     private GameObject _startingPointBarrier;
     private GameObject _triggerForRegistrationSpeed;
-    
-
-
-    //public float SpeedCar { get; private set; }
-
 
     private void Awake()
     {
-    //    _statusPlayerSP = GameObject.FindGameObjectWithTag("StatusPlayer").GetComponent<GameManager>();
         _startingPointBarrier = GameObject.FindGameObjectWithTag("StartingPointBarrier");
         _triggerForRegistrationSpeed = GameObject.FindGameObjectWithTag("TriggerForRegistrationSpeed");
         _carRb = this.GetComponent<Rigidbody>();
     }
 
-    //private void Update()
-    //{
-    //    SpeedCar = _carRb.velocity.magnitude;
-    //    Debug.Log(SpeedCar);
-    //}
     public void ResetCrashedValue()
     {
         SpeedCarInMomentCrash = 0;
@@ -40,6 +28,11 @@ public class CarControler : MonoBehaviour
     public void Move(float valuePush)
     {
         _carRb.AddForce(Vector3.forward * valuePush, ForceMode.Impulse);
+    }
+
+    public bool CheckACarsStop()
+    {
+        return _carRb.velocity.magnitude < 0.001;
     }
 
     private void OnTriggerEnter(Collider other)

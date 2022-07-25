@@ -17,6 +17,6 @@ public class ManControler : MonoBehaviour
 
     public bool CheckAMansStop()
     {
-        return _manRb.velocity.magnitude < 0.1;
+        return _manRb.velocity.magnitude < 0.01;
     }
 }
