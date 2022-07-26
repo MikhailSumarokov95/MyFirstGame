@@ -8,18 +8,13 @@ namespace FlyMan.Game
 {
     public class GameUIControler : MonoBehaviour
     {
-        //[SerializeField] private InputControler _inputControler;
         [SerializeField] private Slider _sliderPushForceValue;
-        //private bool _frezeeSliderPushForceValue;
-        //[SerializeField] private Text _scoreText;
-        //[SerializeField] private Text _topScoreText;
+        [SerializeField] private Text _scoreText;
+        [SerializeField] private Text _topScoreText;
         [SerializeField] private GameObject _restartButton;
         [SerializeField] private GameObject _menuButton;
         public bool RestartButtonOnClick { get; private set; }
         public bool MenuButtonOnClick { get; private set; }
-        //[SerializeField] private GameManager _gameManager;
-        //[SerializeField] private GameObject _storageTopScore;
-        //[SerializeField] private int _topScore;
 
         //private void Awake()
         //{
@@ -27,25 +22,21 @@ namespace FlyMan.Game
         //    _topScore = GameObject.FindGameObjectWithTag("StorageDataGame").GetComponent<StorageDataGame>().GetTopScore();
         //    SetTopScoreText(_topScore);
         //}
-        private void Start()
-        {
-            
-        }
 
         public void GetValueSliderPushForce(float value)
         {
             _sliderPushForceValue.value = value / 100;
         }
 
-        //public void SetScoreText(int scoreRound)
-        //{
-        //    _scoreText.text = "Score: " + scoreRound;
-        //}
+        public void SetScoreText(int scoreRound)
+        {
+            _scoreText.text = "Score: " + scoreRound;
+        }
 
-        //public void SetTopScoreText(int topScore)
-        //{
-        //    _topScoreText.text = "Top Score: " + topScore;
-        //}
+        public void SetTopScoreText(int topScore)
+        {
+            _topScoreText.text = "Top Score: " + topScore;
+        }
 
         public void ActivateRoundIsOverWindows()
         {

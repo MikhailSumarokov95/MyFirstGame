@@ -14,6 +14,7 @@ namespace FlyMan.Behavior
         private Vector3 _carStartPosition;
         private CameraControl _cameraControl;
         private GameObject _car;
+        private StorageDataGame _storageDataGame;
 
         public void Enter()
         {
@@ -25,6 +26,8 @@ namespace FlyMan.Behavior
             _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
             _cameraControl = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraControl>();
             _cameraControl.FollowGameObject(_car);
+            _storageDataGame = GameObject.FindGameObjectWithTag("StorageDataGame").GetComponent<StorageDataGame>();
+            _gameUIControl.SetTopScoreText(_storageDataGame.GetTopScore());
         }
 
         public void Exit()

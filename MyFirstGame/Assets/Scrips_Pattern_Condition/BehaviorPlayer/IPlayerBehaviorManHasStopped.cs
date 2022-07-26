@@ -9,6 +9,10 @@ namespace FlyMan.Behavior
         private GameUIControler _gameUIControler;
         private Player _player;
         private Destroyer _destroyer;
+        private ScoreControler _scoreControler;
+        private StorageDataGame _storageDataGame;
+        private int _scoreRound;
+        private int _topScore;
 
         public void Enter()
         {
@@ -16,6 +20,7 @@ namespace FlyMan.Behavior
             _gameUIControler.ActivateRoundIsOverWindows();
             _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
             _destroyer = GameObject.FindGameObjectWithTag("Destroyer").GetComponent<Destroyer>();
+            SetScore();
         }
 
         public void Exit()
@@ -36,6 +41,21 @@ namespace FlyMan.Behavior
                 _gameUIControler.DisableRoundIsOverWindows();
                 _player.SetBehaviorCarStanding();
             }
+        }
+
+        private void SetScore()
+        {
+            _scoreControler = GameObject.FindGameObjectWithTag("ScoreControler").GetComponent<ScoreControler>();
+            _scoreRound = _scoreControler.GetScore();
+            _gameUIControler.SetScoreText(_scoreRound);
+            _storageDataGame = GameObject.FindGameObjectWithTag("StorageDataGame").GetComponent<StorageDataGame>();
+            _topScore = _storageDataGame.GetTopScore();
+            if (_topScore > _scoreRound)
+            {
+                _topScore = _scoreRound;
+                _storageDataGame.SetTopScore(_topScore);
+            }
+            _gameUIControler.SetTopScoreText(_topScore);
         }
 
         private void BackToMenu()
