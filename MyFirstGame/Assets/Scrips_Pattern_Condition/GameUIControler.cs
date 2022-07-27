@@ -35,7 +35,6 @@ namespace FlyMan.Game
 
         public void SetTopScoreText(int topScore)
         {
-            Debug.Log(topScore + " UI");
             _topScoreText.text = "Top Score: " + topScore;
         }
 

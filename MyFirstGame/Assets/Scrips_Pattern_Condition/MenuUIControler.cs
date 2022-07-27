@@ -14,7 +14,6 @@ namespace FlyMan.Game
         {
             _topScore = GameObject.FindGameObjectWithTag("StorageDataGame").GetComponent<StorageDataGame>().GetTopScore();
             SetTopScoreText(_topScore);
-            Debug.Log("MenuUI " + _topScore);
             _start.GetComponent<Button>().onClick.AddListener(GoToGame);
         }
 

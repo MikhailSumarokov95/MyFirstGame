@@ -18,8 +18,9 @@ namespace FlyMan.Behavior
 
         public void Enter()
         {
-            _car = _creator.CreateCar(_carStartPosition);
             this.Initialization();
+            _car = _creator.CreateCar(_carStartPosition);
+            _carControler = _car.GetComponent<CarControler>();
             _cameraControl.FollowGameObject(_car);
             _gameUIControl.SetTopScoreText(_storageDataGame.GetTopScore());
         }
@@ -47,7 +48,6 @@ namespace FlyMan.Behavior
 
         private void Initialization ()
         {
-            _carControler = _car.GetComponent<CarControler>();
             _creator = GameObject.FindGameObjectWithTag("Creator").GetComponent<Creator>();
             _inputControler = GameObject.FindGameObjectWithTag("InputControler").GetComponent<InputControler>();
             _gameUIControl = GameObject.FindGameObjectWithTag("GameUIControler").GetComponent<GameUIControler>();
