@@ -16,10 +16,8 @@ namespace FlyMan.Behavior
 
         public void Enter()
         {
-            _gameUIControler = GameObject.FindGameObjectWithTag("GameUIControler").GetComponent<GameUIControler>();
+            Initialization();
             _gameUIControler.ActivateRoundIsOverWindows();
-            _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-            _destroyer = GameObject.FindGameObjectWithTag("Destroyer").GetComponent<Destroyer>();
             SetScore();
         }
 
@@ -43,6 +41,13 @@ namespace FlyMan.Behavior
             }
         }
 
+        private void Initialization()
+        {
+            _gameUIControler = GameObject.FindGameObjectWithTag("GameUIControler").GetComponent<GameUIControler>();
+            _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+            _destroyer = GameObject.FindGameObjectWithTag("Destroyer").GetComponent<Destroyer>();
+        }
+
         private void SetScore()
         {
             _scoreControler = GameObject.FindGameObjectWithTag("ScoreControler").GetComponent<ScoreControler>();
@@ -50,7 +55,7 @@ namespace FlyMan.Behavior
             _gameUIControler.SetScoreText(_scoreRound);
             _storageDataGame = GameObject.FindGameObjectWithTag("StorageDataGame").GetComponent<StorageDataGame>();
             _topScore = _storageDataGame.GetTopScore();
-            if (_topScore > _scoreRound)
+            if (_topScore < _scoreRound)
             {
                 _topScore = _scoreRound;
                 _storageDataGame.SetTopScore(_topScore);

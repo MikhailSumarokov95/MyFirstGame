@@ -9,14 +9,12 @@ namespace FlyMan.Game
         [SerializeField] private GameObject _start;
         [SerializeField] private Text _topScoreText;
         private int _topScore;
-        private void Awake()
-        {
-            _topScore = GameObject.FindGameObjectWithTag("StorageDataGame").GetComponent<StorageDataGame>().GetTopScore();
-            SetTopScoreText(_topScore);
-        }
 
         private void Start()
         {
+            _topScore = GameObject.FindGameObjectWithTag("StorageDataGame").GetComponent<StorageDataGame>().GetTopScore();
+            SetTopScoreText(_topScore);
+            Debug.Log("MenuUI " + _topScore);
             _start.GetComponent<Button>().onClick.AddListener(GoToGame);
         }
 

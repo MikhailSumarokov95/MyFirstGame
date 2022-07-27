@@ -18,15 +18,9 @@ namespace FlyMan.Behavior
 
         public void Enter()
         {
-            _creator = GameObject.FindGameObjectWithTag("Creator").GetComponent<Creator>();
             _car = _creator.CreateCar(_carStartPosition);
-            _inputControler = GameObject.FindGameObjectWithTag("InputControler").GetComponent<InputControler>();
-            _gameUIControl = GameObject.FindGameObjectWithTag("GameUIControler").GetComponent<GameUIControler>();
-            _carControler = _car.GetComponent<CarControler>();
-            _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-            _cameraControl = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraControl>();
+            this.Initialization();
             _cameraControl.FollowGameObject(_car);
-            _storageDataGame = GameObject.FindGameObjectWithTag("StorageDataGame").GetComponent<StorageDataGame>();
             _gameUIControl.SetTopScoreText(_storageDataGame.GetTopScore());
         }
 
@@ -49,6 +43,17 @@ namespace FlyMan.Behavior
                 _carControler.Move(_inputControler.ValuePush);
                 _player.SetBehaviorCarRides();
             }
+        }
+
+        private void Initialization ()
+        {
+            _carControler = _car.GetComponent<CarControler>();
+            _creator = GameObject.FindGameObjectWithTag("Creator").GetComponent<Creator>();
+            _inputControler = GameObject.FindGameObjectWithTag("InputControler").GetComponent<InputControler>();
+            _gameUIControl = GameObject.FindGameObjectWithTag("GameUIControler").GetComponent<GameUIControler>();
+            _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+            _cameraControl = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraControl>();
+            _storageDataGame = GameObject.FindGameObjectWithTag("StorageDataGame").GetComponent<StorageDataGame>();
         }
     }
 }

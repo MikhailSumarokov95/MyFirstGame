@@ -12,6 +12,7 @@ namespace FlyMan.Game
         private void Awake()
         {
             LoadData();
+            Debug.Log("AwakeStorage");
         }
         private void SaveData()
         {
@@ -22,6 +23,7 @@ namespace FlyMan.Game
             data.TopScore = _topScore;
             bf.Serialize(file, data);
             file.Close();
+            Debug.Log("Game data saved!");
         }
 
         private void LoadData()
@@ -42,6 +44,7 @@ namespace FlyMan.Game
 
         public int GetTopScore()
         {
+            Debug.Log(_topScore + " Storage");
             return _topScore;
         }
 

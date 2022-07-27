@@ -16,15 +16,11 @@ namespace FlyMan.Behavior
 
         public void Enter()
         {
-            _carControler = GameObject.FindGameObjectWithTag("Car").GetComponent<CarControler>();
-            _creator = GameObject.FindGameObjectWithTag("Creator").GetComponent<Creator>();
             _man = _creator.CreateMan(_carControler.PositionCarInMomentCrash + _indetManPosition);
-            _cameraControl = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraControl>();
+            this.Initialization();
             _cameraControl.FollowGameObject(_man);
-            _manControler = _man.GetComponent<ManControler>();
             _manControler.Move(_carControler.SpeedCarInMomentCrash * _boostSpeedMoveMan, Vector3.forward);
-            _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-           _carControler.ResetCrashedValue();
+            _carControler.ResetCrashedValue();
         }
 
         public void Exit()
@@ -36,6 +32,15 @@ namespace FlyMan.Behavior
         {
             if (_manControler.CheckAMansStop())
                 _player.SetBehaviorManStopped();
+        }
+
+        private void Initialization()
+        {
+            _carControler = GameObject.FindGameObjectWithTag("Car").GetComponent<CarControler>();
+            _creator = GameObject.FindGameObjectWithTag("Creator").GetComponent<Creator>();
+            _cameraControl = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraControl>();
+            _manControler = _man.GetComponent<ManControler>();
+            _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         }
     }
 }

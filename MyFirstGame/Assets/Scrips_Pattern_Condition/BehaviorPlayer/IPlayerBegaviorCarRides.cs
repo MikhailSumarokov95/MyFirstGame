@@ -10,8 +10,7 @@ namespace FlyMan.Behavior
 
         public void Enter()
         {
-            _carControler = GameObject.FindGameObjectWithTag("Car").GetComponent<CarControler>();
-            _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+            this.Initialization();
         }
 
         public void Exit()
@@ -23,6 +22,12 @@ namespace FlyMan.Behavior
         {
             if (_carControler.CarCrashedIntoBarrier) FiringMan();
             if (_carControler.CheckACarsStop()) _player.SetBehaviorManStopped();
+        }
+
+        private void Initialization()
+        {
+            _carControler = GameObject.FindGameObjectWithTag("Car").GetComponent<CarControler>();
+            _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
         }
 
         private void FiringMan()
