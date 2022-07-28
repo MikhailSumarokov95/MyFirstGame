@@ -5,6 +5,7 @@ using UnityEngine;
 public class ManControler : MonoBehaviour
 {
     private Rigidbody _manRb;
+    private bool _delayed;
 
     private void Awake()
     {
@@ -13,10 +14,19 @@ public class ManControler : MonoBehaviour
     public void Move(float forsePush, Vector3 directionPush)
     {
         _manRb.AddForce(directionPush * forsePush, ForceMode.Impulse);
+        StartCoroutine(DelayTimeOfAwake());
     }
 
     public bool CheckAMansStop()
     {
-        return _manRb.velocity.magnitude < 0.01;
+        if (_delayed) return _manRb.velocity.magnitude < 0.01;
+        else return false;
+    }
+
+    private IEnumerator DelayTimeOfAwake()
+    {
+        yield return new WaitForSeconds(1);
+        _delayed = true;
     }
 }
+

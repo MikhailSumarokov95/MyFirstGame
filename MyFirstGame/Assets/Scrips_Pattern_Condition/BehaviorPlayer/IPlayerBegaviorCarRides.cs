@@ -7,6 +7,7 @@ namespace FlyMan.Behavior
     {
         private CarControler _carControler;
         private Player _player;
+        private GameUIControler _gameUIControl;
 
         public void Enter()
         {
@@ -22,12 +23,14 @@ namespace FlyMan.Behavior
         {
             if (_carControler.CarCrashedIntoBarrier) FiringMan();
             if (_carControler.CheckACarsStop()) _player.SetBehaviorManStopped();
+            if (_gameUIControl.GetRestartButtonAllTimeIsOn()) _player.SetBehaviorCarStanding();
         }
 
         private void Initialization()
         {
             _carControler = GameObject.FindGameObjectWithTag("Car").GetComponent<CarControler>();
             _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+            _gameUIControl = GameObject.FindGameObjectWithTag("GameUIControler").GetComponent<GameUIControler>();
         }
 
         private void FiringMan()

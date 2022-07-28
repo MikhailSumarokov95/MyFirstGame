@@ -8,7 +8,7 @@ namespace FlyMan.Behavior
     {
         private GameUIControler _gameUIControler;
         private Player _player;
-        private Destroyer _destroyer;
+
         private ScoreControler _scoreControler;
         private StorageDataGame _storageDataGame;
         private int _scoreRound;
@@ -23,18 +23,17 @@ namespace FlyMan.Behavior
 
         public void Exit()
         {
-            _destroyer.DestroyMan();
-            _destroyer.DestroyCar();
+
         }
 
         public void Update()
         {
-            if (_gameUIControler.MenuButtonOnClick)
+            if (_gameUIControler.GetMenuButtonOnClick())
             {
                 _gameUIControler.DisableRoundIsOverWindows();
                 BackToMenu();
             }
-            if (_gameUIControler.RestartButtonOnClick)
+            if (_gameUIControler.GetRestartButtonOnClick())
             {
                 _gameUIControler.DisableRoundIsOverWindows();
                 _player.SetBehaviorCarStanding();
@@ -45,7 +44,6 @@ namespace FlyMan.Behavior
         {
             _gameUIControler = GameObject.FindGameObjectWithTag("GameUIControler").GetComponent<GameUIControler>();
             _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-            _destroyer = GameObject.FindGameObjectWithTag("Destroyer").GetComponent<Destroyer>();
         }
 
         private void SetScore()

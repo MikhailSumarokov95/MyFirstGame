@@ -10,6 +10,7 @@ public class CarControler : MonoBehaviour
     private Rigidbody _carRb;
     private GameObject _startingPointBarrier;
     private GameObject _triggerForRegistrationSpeed;
+    private bool _delayed;
 
     private void Awake()
     {
@@ -28,11 +29,13 @@ public class CarControler : MonoBehaviour
     public void Move(float valuePush)
     {
         _carRb.AddForce(Vector3.forward * valuePush, ForceMode.Impulse);
+        StartCoroutine(DelayTimeOfAwake());
     }
 
     public bool CheckACarsStop()
     {
-        return _carRb.velocity.magnitude < 0.001;
+        if (_delayed) return _carRb.velocity.magnitude < 0.01;
+        else return false;
     }
 
     private void OnTriggerEnter(Collider other)
@@ -48,5 +51,11 @@ public class CarControler : MonoBehaviour
             PositionCarInMomentCrash = this.transform.position;
             CarCrashedIntoBarrier = true;
         }
+    }
+
+    private IEnumerator DelayTimeOfAwake()
+    {
+        yield return new WaitForSeconds(1);
+        _delayed = true;
     }
 }

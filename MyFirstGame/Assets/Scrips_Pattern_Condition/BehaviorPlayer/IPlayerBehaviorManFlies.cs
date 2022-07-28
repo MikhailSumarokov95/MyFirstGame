@@ -13,6 +13,7 @@ namespace FlyMan.Behavior
         private GameObject _man;
         private int _boostSpeedMoveMan = 100;
         private ManControler _manControler;
+        private GameUIControler _gameUIControl;
 
         public void Enter()
         {
@@ -22,7 +23,7 @@ namespace FlyMan.Behavior
             _manControler = _man.GetComponent<ManControler>();
             _manControler.Move(_carControler.SpeedCarInMomentCrash * _boostSpeedMoveMan, Vector3.forward);
             _carControler.ResetCrashedValue();
-        }
+    }
 
         public void Exit()
         {
@@ -33,6 +34,7 @@ namespace FlyMan.Behavior
         {
             if (_manControler.CheckAMansStop())
                 _player.SetBehaviorManStopped();
+            if (_gameUIControl.GetRestartButtonAllTimeIsOn()) _player.SetBehaviorCarStanding();
         }
 
         private void Initialization()
@@ -41,6 +43,7 @@ namespace FlyMan.Behavior
             _creator = GameObject.FindGameObjectWithTag("Creator").GetComponent<Creator>();
             _cameraControl = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraControl>();
             _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+            _gameUIControl = GameObject.FindGameObjectWithTag("GameUIControler").GetComponent<GameUIControler>();
         }
     }
 }

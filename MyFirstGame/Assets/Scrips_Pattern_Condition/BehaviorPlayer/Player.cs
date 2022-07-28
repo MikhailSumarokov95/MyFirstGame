@@ -53,38 +53,25 @@ public class Player : MonoBehaviour
 
     public void SetBehaviorCarStanding()
     {
-        if (_behaviorCurrent == null ||
-            _behaviorCurrent == _behaviorsMap[typeof(IPlayerBehaviorManHasStopped)])
-        {
-            var behavior = this.GetBehavior<IPlayerBehaviorCarStanding>();
-            this.SetBehavior(behavior);
-        }
-        else Debug.Log($"Error! Transition from {_behaviorCurrent} to BehaviorCarStanding");
+        var behavior = this.GetBehavior<IPlayerBehaviorCarStanding>();
+        this.SetBehavior(behavior);
     }
 
     public void SetBehaviorCarRides()
     {
-        if (_behaviorCurrent == _behaviorsMap[typeof(IPlayerBehaviorCarStanding)])
-        {
-            var behavior = this.GetBehavior<IPlayerBehaviorCarRides>();
-            this.SetBehavior(behavior);
-        }
-        else Debug.Log($"Error! Transition from {_behaviorCurrent} to BehaviorManHasStopped");
+         var behavior = this.GetBehavior<IPlayerBehaviorCarRides>();
+         this.SetBehavior(behavior);
     }
 
     public void SetBehaviorManFlies()
     {
-        if (_behaviorCurrent == _behaviorsMap[typeof(IPlayerBehaviorCarRides)])
-        {
-            var behavior = this.GetBehavior<IPlayerBehaviorManFlies>();
-            this.SetBehavior(behavior);
-        }
-        else Debug.Log($"Error! Transition from {_behaviorCurrent} to BehaviorManFlies");
+        var behavior = this.GetBehavior<IPlayerBehaviorManFlies>();
+        this.SetBehavior(behavior);
     }
 
     public void SetBehaviorManStopped()
     {
-            var behavior = this.GetBehavior<IPlayerBehaviorManHasStopped>();
-            this.SetBehavior(behavior);
+        var behavior = this.GetBehavior<IPlayerBehaviorManHasStopped>();
+        this.SetBehavior(behavior);
     }
 }

@@ -15,10 +15,13 @@ namespace FlyMan.Behavior
         private CameraControl _cameraControl;
         private GameObject _car;
         private StorageDataGame _storageDataGame;
+        private Destroyer _destroyer;
 
         public void Enter()
         {
             this.Initialization();
+            _destroyer.DestroyMan();
+            _destroyer.DestroyCar();
             _car = _creator.CreateCar(_carStartPosition);
             _carControler = _car.GetComponent<CarControler>();
             _cameraControl.FollowGameObject(_car);
@@ -44,6 +47,7 @@ namespace FlyMan.Behavior
                 _carControler.Move(_inputControler.ValuePush);
                 _player.SetBehaviorCarRides();
             }
+            if (_gameUIControl.GetRestartButtonAllTimeIsOn()) _player.SetBehaviorCarStanding();
         }
 
         private void Initialization ()
@@ -54,6 +58,7 @@ namespace FlyMan.Behavior
             _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
             _cameraControl = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraControl>();
             _storageDataGame = GameObject.FindGameObjectWithTag("StorageDataGame").GetComponent<StorageDataGame>();
+            _destroyer = GameObject.FindGameObjectWithTag("Destroyer").GetComponent<Destroyer>();
         }
     }
 }
