@@ -9,6 +9,7 @@ namespace FlyMan.Game
     {
         public float ValuePush { get; private set; }
         private bool _coroutineGetAccelerationIsStarted;
+        private float difficulteFactor = 0.001f;
 
         public bool FollowTheTouchOnTheScreen()
         {
@@ -23,12 +24,13 @@ namespace FlyMan.Game
             return false;
         }
 
-        public void ChoiceOfValuePushing(float difficulty)
+        public void ChoiceOfValuePushing(int difficulty)
         {
-            if (!_coroutineGetAccelerationIsStarted) StartCoroutine(GetAcceleration(difficulty));
+            float speedAcceleration = difficulty * difficulteFactor;
+            if (!_coroutineGetAccelerationIsStarted) StartCoroutine(GetAcceleration(speedAcceleration));
             else
             {
-                StopCoroutine(GetAcceleration(difficulty));
+                StopAllCoroutines();
                 _coroutineGetAccelerationIsStarted = false; 
             }
         }
@@ -38,12 +40,12 @@ namespace FlyMan.Game
             ValuePush = 0;
         }
 
-        IEnumerator GetAcceleration(float difficulty)
+        IEnumerator GetAcceleration(float speedAcceleration)
         {
             _coroutineGetAccelerationIsStarted = true;
             while (true)
             {
-                yield return new WaitForSeconds(difficulty);
+                yield return new WaitForSeconds(speedAcceleration);
                 if (ValuePush < 100) ValuePush++;
                 else ValuePush = 0;
             }

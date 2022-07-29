@@ -17,6 +17,7 @@ TagManager:
   - Destroyer
   - Target
   - ScoreControler
+  - DifficultyControler
   layers:
   - Default
   - TransparentFX

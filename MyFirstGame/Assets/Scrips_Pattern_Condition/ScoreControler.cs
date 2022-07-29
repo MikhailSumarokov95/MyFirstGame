@@ -14,7 +14,7 @@ namespace FlyMan.Game
         private int _scoreRound;
         private StorageDataGame _storageDataGame;
         private int _topScore;
-        public int GetScore()
+        public int GetRoundScore()
         {
             if (CheckManIsCreated())
             {
@@ -29,9 +29,14 @@ namespace FlyMan.Game
             else return 0;
         }
 
-        public int GetTopScore()
+        public int GetTopScore(int score)
         {
-            _topScore = _storageDataGame.GetTopScore();
+            _storageDataGame = GameObject.FindGameObjectWithTag("StorageDataGame").GetComponent<StorageDataGame>();
+            if (_topScore < score)
+            {
+                _topScore = score;
+                _storageDataGame.SetTopScore(_topScore);
+            }
             return _topScore;
         }
 

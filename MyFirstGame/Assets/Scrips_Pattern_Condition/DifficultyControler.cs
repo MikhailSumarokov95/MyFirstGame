@@ -6,12 +6,18 @@ namespace FlyMan.Game
 {
     public class DifficultyControler : MonoBehaviour
     {
-        private float difficulty;
+        public int Difficulty { get; private set; }
 
-        
-        public void UpDifficulty()
+        private void Start()
         {
+            Difficulty = 0;
+        }
 
+        public int DefinitionDifficulty(int scoreRound)
+        {
+            if (scoreRound > 0) Difficulty++;
+            else Difficulty = 0;
+            return Difficulty;
         }
     }
 }

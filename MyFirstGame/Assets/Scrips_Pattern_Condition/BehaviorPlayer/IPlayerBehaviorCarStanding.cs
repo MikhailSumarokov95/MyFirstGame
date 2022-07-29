@@ -17,6 +17,8 @@ namespace FlyMan.Behavior
         private GameObject _car;
         private StorageDataGame _storageDataGame;
         private Destroyer _destroyer;
+        private DifficultyControler _difficultyControler;
+        private int _difficulty;
 
         public void Enter()
         {
@@ -28,13 +30,14 @@ namespace FlyMan.Behavior
             _cameraControl.FollowGameObject(_car);
             _gameUIControler.SetTopScoreText(_storageDataGame.GetTopScore());
             _gameUIControler.ActivateMenuButtonAllTimeIsOnOnClick();
+            _difficulty = _difficultyControler.Difficulty;
         }
 
         public void Exit()
         {
             _inputControler.ResetValuePush();
             _numberOfTapsOnTheScreen = 0;
-            _gameUIControler.ActivateMenuButtonAllTimeIsOnOnClick();
+            _gameUIControler.DisableMenuButtonAllTimeIsOnOnClick();
         }
 
         public void Update()
@@ -42,7 +45,7 @@ namespace FlyMan.Behavior
             if (_inputControler.FollowTheTouchOnTheScreen())
             {
                 _numberOfTapsOnTheScreen++;
-                _inputControler.ChoiceOfValuePushing(difficulty);
+                _inputControler.ChoiceOfValuePushing(_difficulty);
             }
             _gameUIControler.GetValueSliderPushForce(_inputControler.ValuePush);
             if (_numberOfTapsOnTheScreen > 1)
@@ -62,6 +65,7 @@ namespace FlyMan.Behavior
             _cameraControl = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraControl>();
             _storageDataGame = GameObject.FindGameObjectWithTag("StorageDataGame").GetComponent<StorageDataGame>();
             _destroyer = GameObject.FindGameObjectWithTag("Destroyer").GetComponent<Destroyer>();
+            _difficultyControler = GameObject.FindGameObjectWithTag("DifficultyControler").GetComponent<DifficultyControler>();
         }
 
         private void BackToMenu()

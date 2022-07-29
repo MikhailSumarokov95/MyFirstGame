@@ -8,17 +8,24 @@ namespace FlyMan.Behavior
     {
         private GameUIControler _gameUIControler;
         private Player _player;
-
         private ScoreControler _scoreControler;
         private StorageDataGame _storageDataGame;
         private int _scoreRound;
         private int _topScore;
+        private int _difficulty;
+        private DifficultyControler _difficultyControler;
+        private int _finalRoundScore;
 
         public void Enter()
         {
             Initialization();
-            _gameUIControler.ActivateRoundIsOverWindows();
             SetScore();
+            if (_scoreRound > 0) _player.SetBehaviorCarStanding();
+            else 
+            {
+                _gameUIControler.ActivateRoundIsOverWindows();
+                _difficultyControler.DefinitionDifficulty(_scoreRound);
+            }
         }
 
         public void Exit()
@@ -47,21 +54,17 @@ namespace FlyMan.Behavior
             _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
             _scoreControler = GameObject.FindGameObjectWithTag("ScoreControler").GetComponent<ScoreControler>();
             _storageDataGame = GameObject.FindGameObjectWithTag("StorageDataGame").GetComponent<StorageDataGame>();
+            _difficultyControler = GameObject.FindGameObjectWithTag("DifficultyControler").GetComponent<DifficultyControler>();
         }
-        // перенести логику топ скор  и гет скор в скор контролер
-        // реализовать дификалтсонтролер
+
         private void SetScore()
         {
-            _scoreRound = _scoreControler.GetScore();
-            _gameUIControler.SetScoreText(_scoreRound);
-            _topScore = _scoreControler.GetTopScore();
-            if (_topScore < _scoreRound)
-            {
-                _topScore = _scoreRound;
-                _storageDataGame.SetTopScore(_topScore);
-            }
-            _gameUIControler.SetTopScoreText(_topScore);
-
+            _scoreRound = _scoreControler.GetRoundScore();
+            //_finalRoundScore = (_scoreRound, )
+            //_gameUIControler.SetScoreText(_difficulty);
+            //_topScore = _storageDataGame.GetTopScore();
+            //_topScore = _scoreControler.GetTopScore(_difficulty);
+            //_gameUIControler.SetTopScoreText(_topScore);
         }
 
         private void BackToMenu()
