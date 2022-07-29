@@ -23,12 +23,12 @@ namespace FlyMan.Game
             return false;
         }
 
-        public void ChoiceOfValuePushing()
+        public void ChoiceOfValuePushing(float difficulty)
         {
-            if (!_coroutineGetAccelerationIsStarted) StartCoroutine("GetAcceleration");
+            if (!_coroutineGetAccelerationIsStarted) StartCoroutine(GetAcceleration(difficulty));
             else
             {
-                StopCoroutine("GetAcceleration");
+                StopCoroutine(GetAcceleration(difficulty));
                 _coroutineGetAccelerationIsStarted = false; 
             }
         }
@@ -38,12 +38,12 @@ namespace FlyMan.Game
             ValuePush = 0;
         }
 
-        IEnumerator GetAcceleration()
+        IEnumerator GetAcceleration(float difficulty)
         {
             _coroutineGetAccelerationIsStarted = true;
             while (true)
             {
-                yield return new WaitForSeconds(0.01f);
+                yield return new WaitForSeconds(difficulty);
                 if (ValuePush < 100) ValuePush++;
                 else ValuePush = 0;
             }

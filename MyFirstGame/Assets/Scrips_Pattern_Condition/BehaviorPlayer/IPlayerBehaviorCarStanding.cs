@@ -1,5 +1,6 @@
 ﻿using FlyMan.Game;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace FlyMan.Behavior
 {
@@ -7,7 +8,7 @@ namespace FlyMan.Behavior
     {
         private Creator _creator;
         private InputControler _inputControler;
-        private GameUIControler _gameUIControl;
+        private GameUIControler _gameUIControler;
         private CarControler _carControler;
         private Player _player;
         private int _numberOfTapsOnTheScreen;
@@ -25,13 +26,15 @@ namespace FlyMan.Behavior
             _car = _creator.CreateCar(_carStartPosition);
             _carControler = _car.GetComponent<CarControler>();
             _cameraControl.FollowGameObject(_car);
-            _gameUIControl.SetTopScoreText(_storageDataGame.GetTopScore());
+            _gameUIControler.SetTopScoreText(_storageDataGame.GetTopScore());
+            _gameUIControler.ActivateMenuButtonAllTimeIsOnOnClick();
         }
 
         public void Exit()
         {
             _inputControler.ResetValuePush();
             _numberOfTapsOnTheScreen = 0;
+            _gameUIControler.ActivateMenuButtonAllTimeIsOnOnClick();
         }
 
         public void Update()
@@ -39,26 +42,31 @@ namespace FlyMan.Behavior
             if (_inputControler.FollowTheTouchOnTheScreen())
             {
                 _numberOfTapsOnTheScreen++;
-                _inputControler.ChoiceOfValuePushing();
+                _inputControler.ChoiceOfValuePushing(difficulty);
             }
-            _gameUIControl.GetValueSliderPushForce(_inputControler.ValuePush);
+            _gameUIControler.GetValueSliderPushForce(_inputControler.ValuePush);
             if (_numberOfTapsOnTheScreen > 1)
             {
                 _carControler.Move(_inputControler.ValuePush);
                 _player.SetBehaviorCarRides();
             }
-            if (_gameUIControl.GetRestartButtonAllTimeIsOn()) _player.SetBehaviorCarStanding();
+            if (_gameUIControler.GetMenuButtonAllTimeIsOnOnClick()) this.BackToMenu();
         }
 
         private void Initialization ()
         {
             _creator = GameObject.FindGameObjectWithTag("Creator").GetComponent<Creator>();
             _inputControler = GameObject.FindGameObjectWithTag("InputControler").GetComponent<InputControler>();
-            _gameUIControl = GameObject.FindGameObjectWithTag("GameUIControler").GetComponent<GameUIControler>();
+            _gameUIControler = GameObject.FindGameObjectWithTag("GameUIControler").GetComponent<GameUIControler>();
             _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
             _cameraControl = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraControl>();
             _storageDataGame = GameObject.FindGameObjectWithTag("StorageDataGame").GetComponent<StorageDataGame>();
             _destroyer = GameObject.FindGameObjectWithTag("Destroyer").GetComponent<Destroyer>();
+        }
+
+        private void BackToMenu()
+        {
+            SceneManager.LoadScene(0);
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using FlyMan.Game;
+using UnityEngine.SceneManagement;
 
 namespace FlyMan.Behavior
 {
@@ -13,7 +14,7 @@ namespace FlyMan.Behavior
         private GameObject _man;
         private int _boostSpeedMoveMan = 100;
         private ManControler _manControler;
-        private GameUIControler _gameUIControl;
+        private GameUIControler _gameUIControler;
 
         public void Enter()
         {
@@ -23,18 +24,22 @@ namespace FlyMan.Behavior
             _manControler = _man.GetComponent<ManControler>();
             _manControler.Move(_carControler.SpeedCarInMomentCrash * _boostSpeedMoveMan, Vector3.forward);
             _carControler.ResetCrashedValue();
+            _gameUIControler.ActivateRestartButtonAllTimeIsOn();
+            _gameUIControler.ActivateMenuButtonAllTimeIsOnOnClick();
     }
 
         public void Exit()
         {
-
+            _gameUIControler.DisableRestartButtonAllTimeIsOn();
+            _gameUIControler.DisableMenuButtonAllTimeIsOnOnClick();
         }
 
         public void Update()
         {
             if (_manControler.CheckAMansStop())
                 _player.SetBehaviorManStopped();
-            if (_gameUIControl.GetRestartButtonAllTimeIsOn()) _player.SetBehaviorCarStanding();
+            if (_gameUIControler.GetRestartButtonAllTimeIsOn()) _player.SetBehaviorCarStanding();
+            if (_gameUIControler.GetMenuButtonAllTimeIsOnOnClick()) this.BackToMenu(); 
         }
 
         private void Initialization()
@@ -43,7 +48,12 @@ namespace FlyMan.Behavior
             _creator = GameObject.FindGameObjectWithTag("Creator").GetComponent<Creator>();
             _cameraControl = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraControl>();
             _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
-            _gameUIControl = GameObject.FindGameObjectWithTag("GameUIControler").GetComponent<GameUIControler>();
+            _gameUIControler = GameObject.FindGameObjectWithTag("GameUIControler").GetComponent<GameUIControler>();
+        }
+
+        private void BackToMenu()
+        {
+            SceneManager.LoadScene(0);
         }
     }
 }

@@ -31,34 +31,37 @@ namespace FlyMan.Behavior
             if (_gameUIControler.GetMenuButtonOnClick())
             {
                 _gameUIControler.DisableRoundIsOverWindows();
-                BackToMenu();
+                this.BackToMenu();
             }
             if (_gameUIControler.GetRestartButtonOnClick())
             {
                 _gameUIControler.DisableRoundIsOverWindows();
                 _player.SetBehaviorCarStanding();
             }
+            if (_gameUIControler.GetMenuButtonAllTimeIsOnOnClick()) this.BackToMenu();
         }
 
         private void Initialization()
         {
             _gameUIControler = GameObject.FindGameObjectWithTag("GameUIControler").GetComponent<GameUIControler>();
             _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
+            _scoreControler = GameObject.FindGameObjectWithTag("ScoreControler").GetComponent<ScoreControler>();
+            _storageDataGame = GameObject.FindGameObjectWithTag("StorageDataGame").GetComponent<StorageDataGame>();
         }
-
+        // перенести логику топ скор  и гет скор в скор контролер
+        // реализовать дификалтсонтролер
         private void SetScore()
         {
-            _scoreControler = GameObject.FindGameObjectWithTag("ScoreControler").GetComponent<ScoreControler>();
             _scoreRound = _scoreControler.GetScore();
             _gameUIControler.SetScoreText(_scoreRound);
-            _storageDataGame = GameObject.FindGameObjectWithTag("StorageDataGame").GetComponent<StorageDataGame>();
-            _topScore = _storageDataGame.GetTopScore();
+            _topScore = _scoreControler.GetTopScore();
             if (_topScore < _scoreRound)
             {
                 _topScore = _scoreRound;
                 _storageDataGame.SetTopScore(_topScore);
             }
             _gameUIControler.SetTopScoreText(_topScore);
+
         }
 
         private void BackToMenu()

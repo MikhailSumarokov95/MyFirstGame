@@ -29,7 +29,7 @@ namespace FlyMan.Game
             else return 0;
         }
 
-        private int GetTopScore()
+        public int GetTopScore()
         {
             _topScore = _storageDataGame.GetTopScore();
             return _topScore;
