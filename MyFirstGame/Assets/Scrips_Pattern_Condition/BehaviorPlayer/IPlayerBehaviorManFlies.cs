@@ -15,6 +15,7 @@ namespace FlyMan.Behavior
         private int _boostSpeedMoveMan = 100;
         private ManControler _manControler;
         private GameUIControler _gameUIControler;
+        private ScoreControler _scoreControler;
 
         public void Enter()
         {
@@ -36,9 +37,8 @@ namespace FlyMan.Behavior
 
         public void Update()
         {
-            if (_manControler.CheckAMansStop())
-                _player.SetBehaviorManStopped();
-            if (_gameUIControler.GetRestartButtonAllTimeIsOn()) _player.SetBehaviorCarStanding();
+            if (_manControler.CheckAMansStop()) _player.SetBehaviorManStopped();
+            if (_gameUIControler.GetRestartButtonAllTimeIsOn()) this.RestartGame();
             if (_gameUIControler.GetMenuButtonAllTimeIsOnOnClick()) this.BackToMenu(); 
         }
 
@@ -49,11 +49,19 @@ namespace FlyMan.Behavior
             _cameraControl = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraControl>();
             _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
             _gameUIControler = GameObject.FindGameObjectWithTag("GameUIControler").GetComponent<GameUIControler>();
+            _scoreControler = GameObject.FindGameObjectWithTag("ScoreControler").GetComponent<ScoreControler>();
         }
 
         private void BackToMenu()
         {
             SceneManager.LoadScene(0);
+        }
+
+        private void RestartGame()
+        {
+            _scoreControler.ResetTotalScore();
+            _gameUIControler.SetScoreText(0);
+            _player.SetBehaviorCarStanding();
         }
     }
 }

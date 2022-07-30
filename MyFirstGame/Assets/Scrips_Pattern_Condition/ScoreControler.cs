@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 namespace FlyMan.Game
@@ -12,8 +10,7 @@ namespace FlyMan.Game
         private Vector3 _targetPosition;
         private MeshCollider _targetMesh;
         private int _scoreRound;
-        private StorageDataGame _storageDataGame;
-        private int _topScore;
+        private int _totalScore;
         public int GetRoundScore()
         {
             if (CheckManIsCreated())
@@ -29,15 +26,21 @@ namespace FlyMan.Game
             else return 0;
         }
 
-        public int GetTopScore(int score)
+        public int GetTopScore(int score, int oldTopScore)
         {
-            _storageDataGame = GameObject.FindGameObjectWithTag("StorageDataGame").GetComponent<StorageDataGame>();
-            if (_topScore < score)
-            {
-                _topScore = score;
-                _storageDataGame.SetTopScore(_topScore);
-            }
-            return _topScore;
+            if (oldTopScore < score) oldTopScore = score;
+            return oldTopScore;
+        }
+
+        public int GetTotalScore(int scoreRound, int difficultFactor)
+        {
+            if (scoreRound == 0) return 0; 
+            else return _totalScore += scoreRound * difficultFactor;
+        }
+
+        public void ResetTotalScore()
+        {
+            _totalScore = 0;
         }
 
         private bool CheckManIsCreated()

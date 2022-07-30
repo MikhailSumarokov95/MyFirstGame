@@ -9,6 +9,7 @@ namespace FlyMan.Behavior
         private CarControler _carControler;
         private Player _player;
         private GameUIControler _gameUIControler;
+        private ScoreControler _scoreControler;
 
         public void Enter()
         {
@@ -27,7 +28,7 @@ namespace FlyMan.Behavior
         {
             if (_carControler.CarCrashedIntoBarrier) this.FiringMan();
             if (_carControler.CheckACarsStop()) _player.SetBehaviorManStopped();
-            if (_gameUIControler.GetRestartButtonAllTimeIsOn()) _player.SetBehaviorCarStanding();
+            if (_gameUIControler.GetRestartButtonAllTimeIsOn()) this.RestartGame();
             if (_gameUIControler.GetMenuButtonAllTimeIsOnOnClick()) this.BackToMenu();
         }
 
@@ -36,6 +37,7 @@ namespace FlyMan.Behavior
             _carControler = GameObject.FindGameObjectWithTag("Car").GetComponent<CarControler>();
             _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
             _gameUIControler = GameObject.FindGameObjectWithTag("GameUIControler").GetComponent<GameUIControler>();
+            _scoreControler = GameObject.FindGameObjectWithTag("ScoreControler").GetComponent<ScoreControler>();
         }
 
         private void FiringMan()
@@ -46,6 +48,13 @@ namespace FlyMan.Behavior
         private void BackToMenu()
         {
             SceneManager.LoadScene(0);
+        }
+
+        private void RestartGame()
+        {
+            _scoreControler.ResetTotalScore();
+            _gameUIControler.SetScoreText(0);
+            _player.SetBehaviorCarStanding();
         }
     }
 }

@@ -10,14 +10,17 @@ namespace FlyMan.Game
 
         private void Start()
         {
-            Difficulty = 0;
+            Difficulty = 1;
         }
 
-        public int DefinitionDifficulty(int scoreRound)
+        public int DefinitionDifficulty()
         {
-            if (scoreRound > 0) Difficulty++;
-            else Difficulty = 0;
-            return Difficulty;
+            return Difficulty++;
+        }
+
+        public void ResetDifficulty()
+        {
+            Difficulty = 1;
         }
     }
 }
