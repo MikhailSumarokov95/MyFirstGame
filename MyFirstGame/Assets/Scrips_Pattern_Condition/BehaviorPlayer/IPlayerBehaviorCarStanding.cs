@@ -65,7 +65,8 @@ namespace FlyMan.Behavior
             _cameraControl = GameObject.FindGameObjectWithTag("MainCamera").GetComponent<CameraControl>();
             _storageDataGame = GameObject.FindGameObjectWithTag("StorageDataGame").GetComponent<StorageDataGame>();
             _destroyer = GameObject.FindGameObjectWithTag("Destroyer").GetComponent<Destroyer>();
-            _difficultyControler = GameObject.FindGameObjectWithTag("DifficultyControler").GetComponent<DifficultyControler>();  
+            _difficultyControler = GameObject.FindGameObjectWithTag("DifficultyControler").GetComponent<DifficultyControler>();
+            _carStartPosition = new(0, 1, 0);
         }
 
         private void BackToMenu()
