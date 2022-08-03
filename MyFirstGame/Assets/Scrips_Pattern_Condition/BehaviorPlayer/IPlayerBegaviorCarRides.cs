@@ -10,6 +10,7 @@ namespace FlyMan.Behavior
         private Player _player;
         private GameUIControler _gameUIControler;
         private ScoreControler _scoreControler;
+        private DifficultyControler _difficultyControler;
 
         public void Enter()
         {
@@ -38,6 +39,7 @@ namespace FlyMan.Behavior
             _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
             _gameUIControler = GameObject.FindGameObjectWithTag("GameUIControler").GetComponent<GameUIControler>();
             _scoreControler = GameObject.FindGameObjectWithTag("ScoreControler").GetComponent<ScoreControler>();
+            _difficultyControler = GameObject.FindGameObjectWithTag("DifficultyControler").GetComponent<DifficultyControler>();
         }
 
         private void FiringMan()
@@ -55,6 +57,7 @@ namespace FlyMan.Behavior
             _scoreControler.ResetTotalScore();
             _gameUIControler.SetScoreText(0);
             _player.SetBehaviorCarStanding();
+            _difficultyControler.ResetDifficulty();
         }
     }
 }

@@ -8,7 +8,7 @@ namespace FlyMan.Behavior
     {
         private CameraControl _cameraControl;
         private Player _player;
-        private Vector3 _indetManPosition = new Vector3(0, 1.7f, 1.5f);
+        private Vector3 _indetManPosition = new Vector3(0, 1.7f, 3f);
         private Creator _creator;
         private CarControler _carControler;
         private GameObject _man;
@@ -16,6 +16,7 @@ namespace FlyMan.Behavior
         private ManControler _manControler;
         private GameUIControler _gameUIControler;
         private ScoreControler _scoreControler;
+        private DifficultyControler _difficultyControler;
 
         public void Enter()
         {
@@ -50,6 +51,7 @@ namespace FlyMan.Behavior
             _player = GameObject.FindGameObjectWithTag("Player").GetComponent<Player>();
             _gameUIControler = GameObject.FindGameObjectWithTag("GameUIControler").GetComponent<GameUIControler>();
             _scoreControler = GameObject.FindGameObjectWithTag("ScoreControler").GetComponent<ScoreControler>();
+            _difficultyControler = GameObject.FindGameObjectWithTag("DifficultyControler").GetComponent<DifficultyControler>();
         }
 
         private void BackToMenu()
@@ -62,6 +64,7 @@ namespace FlyMan.Behavior
             _scoreControler.ResetTotalScore();
             _gameUIControler.SetScoreText(0);
             _player.SetBehaviorCarStanding();
+            _difficultyControler.ResetDifficulty();
         }
     }
 }

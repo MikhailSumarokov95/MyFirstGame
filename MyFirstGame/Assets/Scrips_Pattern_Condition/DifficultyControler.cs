@@ -13,7 +13,7 @@ namespace FlyMan.Game
             Difficulty = 1;
         }
 
-        public int DefinitionDifficulty()
+        public int UpDifficulty()
         {
             return Difficulty++;
         }

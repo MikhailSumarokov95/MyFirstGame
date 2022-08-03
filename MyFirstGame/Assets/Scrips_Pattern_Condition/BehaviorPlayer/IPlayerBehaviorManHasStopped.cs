@@ -20,7 +20,11 @@ namespace FlyMan.Behavior
         {
             this.Initialization();
             this.SetScore();
-            if (_scoreRound > 0) _player.SetBehaviorCarStanding();
+            if (_scoreRound > 0)
+            {
+                _difficultyControler.UpDifficulty();
+                _player.SetBehaviorCarStanding();
+            }
             else 
             {
                 _gameUIControler.ActivateRoundIsOverWindows();

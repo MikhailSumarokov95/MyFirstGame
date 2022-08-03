@@ -24,12 +24,12 @@ namespace FlyMan.Game
 
         public void SetScoreText(int scoreRound)
         {
-            _scoreText.text = "Score: " + scoreRound;
+            _scoreText.text = scoreRound.ToString() ;
         }
 
         public void SetTopScoreText(int topScore)
         {
-            _topScoreText.text = "Top Score: " + topScore;
+            _topScoreText.text = "Top: " + topScore;
         }
 
         public void ActivateRoundIsOverWindows()
