@@ -10,7 +10,7 @@ namespace FlyMan.Game
         private Vector3 _targetPosition;
         private MeshCollider _targetMesh;
         private int _scoreRound;
-        private int _totalScore;
+        private int _score;
         public int GetRoundScore()
         {
             if (CheckManIsCreated())
@@ -26,21 +26,21 @@ namespace FlyMan.Game
             else return 0;
         }
 
-        public int GetTopScore(int score, int oldTopScore)
+        public int GetTopScore(int _totalScore, int oldTopScore)
         {
-            if (oldTopScore < score) oldTopScore = score;
+            if (oldTopScore < _totalScore) oldTopScore = _totalScore;
             return oldTopScore;
         }
 
-        public int GetTotalScore(int scoreRound, int difficultFactor)
+        public int GetScore(int scoreRound, int difficultFactor)
         {
             if (scoreRound == 0) return 0; 
-            else return _totalScore += scoreRound * difficultFactor;
+            else return _score += scoreRound * difficultFactor;
         }
 
-        public void ResetTotalScore()
+        public void ResetScore()
         {
-            _totalScore = 0;
+            _score = 0;
         }
 
         private bool CheckManIsCreated()

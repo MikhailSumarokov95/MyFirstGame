@@ -13,15 +13,17 @@ namespace FlyMan.Behavior
         private int _scoreRound;
         private int _difficulty;
         private DifficultyControler _difficultyControler;
-        private int _totalScore;
+        private int _score;
         private int _oldTopScore;
+        private int _newTopScore;
 
         public void Enter()
         {
             this.Initialization();
-            this.SetScore();
+            _scoreRound = _scoreControler.GetRoundScore();
             if (_scoreRound > 0)
             {
+                this.SetScore();
                 _difficultyControler.UpDifficulty();
                 _player.SetBehaviorCarStanding();
             }
@@ -29,6 +31,8 @@ namespace FlyMan.Behavior
             {
                 _gameUIControler.ActivateRoundIsOverWindows();
                 _difficultyControler.ResetDifficulty();
+                _gameUIControler.SetScoreText(0);
+                _scoreControler.ResetScore();
             }
         }
 
@@ -63,16 +67,13 @@ namespace FlyMan.Behavior
 
         private void SetScore()
         {
-            _scoreRound = _scoreControler.GetRoundScore();
             _difficulty = _difficultyControler.Difficulty;
-            _totalScore = _scoreControler.GetTotalScore(_scoreRound, _difficulty);
+            _score = _scoreControler.GetScore(_scoreRound, _difficulty);
             _oldTopScore = _storageDataGame.GetTopScore();
-            if (_oldTopScore < _totalScore)
-            {
-                _storageDataGame.SetTopScore(_totalScore);
-                _gameUIControler.SetTopScoreText(_totalScore);
-            }
-            _gameUIControler.SetScoreText(_totalScore);
+            _newTopScore = _scoreControler.GetTopScore(_score, _oldTopScore);
+            _storageDataGame.SetTopScore(_newTopScore);
+            _gameUIControler.SetTopScoreText(_newTopScore);
+            _gameUIControler.SetScoreText(_score);
         }
 
         private void BackToMenu()

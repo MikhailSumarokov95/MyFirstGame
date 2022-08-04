@@ -14,14 +14,7 @@ namespace FlyMan.Game
 
         public bool FollowTheTouchOnTheScreen()
         {
-#if UNITY_EDITOR
-            if (Input.GetMouseButtonDown(0))
-            {
-                return true;
-            }
-#else
-            if (Input.touchCount > 0) return true;
-#endif
+            if (Input.GetMouseButtonDown(0)) return true;
             return false;
         }
 

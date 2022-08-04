@@ -54,10 +54,10 @@ namespace FlyMan.Behavior
 
         private void RestartGame()
         {
-            _scoreControler.ResetTotalScore();
+            _scoreControler.ResetScore();
             _gameUIControler.SetScoreText(0);
-            _player.SetBehaviorCarStanding();
             _difficultyControler.ResetDifficulty();
+            _player.SetBehaviorCarStanding();
         }
     }
 }

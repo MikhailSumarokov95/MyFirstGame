@@ -22,9 +22,9 @@ namespace FlyMan.Game
             _sliderPushForceValue.value = value / 100;
         }
 
-        public void SetScoreText(int scoreRound)
+        public void SetScoreText(int totalScore)
         {
-            _scoreText.text = scoreRound.ToString() ;
+            _scoreText.text = totalScore.ToString() ;
         }
 
         public void SetTopScoreText(int topScore)
