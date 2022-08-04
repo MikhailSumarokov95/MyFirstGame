@@ -11,6 +11,7 @@ namespace FlyMan.Behavior
         private GameUIControler _gameUIControler;
         private ScoreControler _scoreControler;
         private DifficultyControler _difficultyControler;
+        private AudioControler _audioControler;
 
         public void Enter()
         {
@@ -23,6 +24,7 @@ namespace FlyMan.Behavior
         {
             _gameUIControler.DisableRestartButtonAllTimeIsOn();
             _gameUIControler.DisableMenuButtonAllTimeIsOnOnClick();
+            _audioControler.PlayDelayedAudio();
         }
 
         public void Update()
@@ -40,6 +42,7 @@ namespace FlyMan.Behavior
             _gameUIControler = GameObject.FindGameObjectWithTag("GameUIControler").GetComponent<GameUIControler>();
             _scoreControler = GameObject.FindGameObjectWithTag("ScoreControler").GetComponent<ScoreControler>();
             _difficultyControler = GameObject.FindGameObjectWithTag("DifficultyControler").GetComponent<DifficultyControler>();
+            _audioControler = GameObject.FindGameObjectWithTag("AudioControler").GetComponent<AudioControler>();
         }
 
         private void FiringMan()

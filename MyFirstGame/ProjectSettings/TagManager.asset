@@ -18,6 +18,8 @@ TagManager:
   - Target
   - ScoreControler
   - DifficultyControler
+  - AudioControler
+  - AudioDelayed
   layers:
   - Default
   - TransparentFX
